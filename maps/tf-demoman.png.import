@@ -15,11 +15,11 @@ dest_files=["res://.godot/imported/tf-demoman.png-8c6fe4beb8947068d045d6f4b6af02
 
 [params]
 
-compress/mode=1
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.3
 compress/uastc_level=0
-compress/rdo_quality_loss=0.0
+compress/rdo_quality_loss=10.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
