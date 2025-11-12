@@ -97,7 +97,7 @@ func generate_vtf_file(texture: Texture2D) -> PackedByteArray:
 	if not is_dxt:
 		image.decompress();
 		image.compress(Image.COMPRESS_S3TC);
-		image.convert(Image.FORMAT_DXT3);
+		image.convert(Image.FORMAT_DXT5);
 
 	image.clear_mipmaps();
 
@@ -106,12 +106,12 @@ func generate_vtf_file(texture: Texture2D) -> PackedByteArray:
 
 	bytes += int_to_int32(7); # version major
 	bytes += int_to_int32(1); # version minor
-	bytes += int_to_int32(63); # header size for version 7.1
+	bytes += int_to_int32(64); # header size for version 7.1
 
 	bytes += int_to_short(image.get_width()); # width
 	bytes += int_to_short(image.get_height()); # height
 
-	bytes += int_to_int32(VTFLoader.Flags.TEXTUREFLAGS_NOMIP); # flags
+	bytes += int_to_int32(VTFLoader.Flags.TEXTUREFLAGS_NOMIP | VTFLoader.Flags.TEXTUREFLAGS_SRGB);
 	bytes += int_to_short(1); # frames
 	bytes += int_to_short(0); # first frame
 	bytes += PackedByteArray([0, 0, 0, 0]); # padding
@@ -144,9 +144,9 @@ func generate_vtf_file(texture: Texture2D) -> PackedByteArray:
 
 	bytes += int_to_byte(lowres_width); # low res image width
 	bytes += int_to_byte(lowres_height); # low res image height
+	bytes += PackedByteArray([0]); # padding
 
 	bytes += lowres_image.get_data(); # low res image data
 	bytes += image.get_data()
 
 	return bytes;
-
