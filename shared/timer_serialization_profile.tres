@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="NetworkedNode" load_steps=9 format=3 uid="uid://dtgaspqx6vgt5"]
+[gd_resource type="Resource" script_class="NetworkedNode" load_steps=10 format=3 uid="uid://dtgaspqx6vgt5"]
 
 [ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="1_sqc3f"]
 [ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="2_yk4yj"]
+[ext_resource type="Script" uid="uid://d0juwtbi2mp3d" path="res://shared/networked_timer.gd" id="3_yk4yj"]
 
 [sub_resource type="Resource" id="Resource_wqfsd"]
 script = ExtResource("1_sqc3f")
@@ -34,12 +35,13 @@ interp_type = 1
 
 [sub_resource type="Resource" id="Resource_nckww"]
 script = ExtResource("1_sqc3f")
-name = &"time_left"
+name = &"time"
 type = 3
 
 [resource]
 resource_name = "Timer Serialization Profile"
 script = ExtResource("2_yk4yj")
+source_script = ExtResource("3_yk4yj")
 base_class = &"Timer"
 properties = Array[ExtResource("1_sqc3f")]([SubResource("Resource_wqfsd"), SubResource("Resource_wpo5q"), SubResource("Resource_22tms"), SubResource("Resource_0a0r0"), SubResource("Resource_y5372"), SubResource("Resource_nckww")])
 metadata/_custom_type_script = "uid://cdcaujmtsbgia"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="NetworkedNode" load_steps=5 format=3 uid="uid://dp6t5564uswgn"]
+
+[ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="1_kpi3t"]
+[ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="2_xxdtq"]
+[ext_resource type="Script" uid="uid://dk4wa2qc0mihq" path="res://gameplay/owner_id.gd" id="3_jgcd8"]
+
+[sub_resource type="Resource" id="Resource_ayguc"]
+script = ExtResource("1_kpi3t")
+name = &"owner_id"
+type = 2
+precision_level = 4
+
+[resource]
+resource_name = "Owner ID"
+script = ExtResource("2_xxdtq")
+source_script = ExtResource("3_jgcd8")
+properties = Array[ExtResource("1_kpi3t")]([SubResource("Resource_ayguc")])
+metadata/_custom_type_script = "uid://cdcaujmtsbgia"
