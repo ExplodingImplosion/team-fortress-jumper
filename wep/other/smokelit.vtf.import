@@ -12,3 +12,4 @@ dest_files=["res://.godot/imported/smokelit.vtf-1e8e8caab8f49be572e1ebf279f2632c
 
 [params]
 
+srgb_conversion_method=1
