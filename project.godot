@@ -281,8 +281,10 @@ player_switch_to_4={
 3d_render/layer_3="Third Person"
 3d_render/layer_4="Projectiles"
 3d_physics/layer_1="Solid Geometry"
+3d_physics/layer_7="Network"
 3d_physics/layer_9="Player"
 3d_physics/layer_10="Projectile"
+3d_physics/layer_11="Hitbox"
 
 [netfox]
 
