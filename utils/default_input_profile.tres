@@ -1,0 +1,307 @@
+[gd_resource type="Resource" script_class="InputProfile" load_steps=60 format=3 uid="uid://bme7pvk6666rt"]
+
+[ext_resource type="Script" uid="uid://b64tbdxswb82r" path="res://utils/input_profile.gd" id="1_ddlck"]
+[ext_resource type="Script" uid="uid://ca4fccp4h37vc" path="res://utils/input_action.gd" id="1_fbhfq"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wfeiw"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_30nql"]
+axis = 1
+axis_value = 1.0
+
+[sub_resource type="Resource" id="Resource_wfeiw"]
+script = ExtResource("1_fbhfq")
+action = &"analog_back"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_wfeiw"), SubResource("InputEventJoypadMotion_30nql")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_mtry5"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_i8h46"]
+axis = 1
+axis_value = -1.0
+
+[sub_resource type="Resource" id="Resource_fbhfq"]
+script = ExtResource("1_fbhfq")
+action = &"analog_forward"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_mtry5"), SubResource("InputEventJoypadMotion_i8h46")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_m7tkj"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_k7phe"]
+axis_value = -1.0
+
+[sub_resource type="Resource" id="Resource_30nql"]
+script = ExtResource("1_fbhfq")
+action = &"analog_left"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_m7tkj"), SubResource("InputEventJoypadMotion_k7phe")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_5iscs"]
+device = -1
+physical_keycode = 75
+unicode = 107
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_1qhob"]
+axis = 3
+axis_value = 1.0
+
+[sub_resource type="Resource" id="Resource_x7jqk"]
+script = ExtResource("1_fbhfq")
+action = &"analog_look_down"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_5iscs"), SubResource("InputEventJoypadMotion_1qhob")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_x7jqk"]
+device = -1
+physical_keycode = 74
+unicode = 106
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_o2su3"]
+axis = 2
+axis_value = -1.0
+
+[sub_resource type="Resource" id="Resource_o2su3"]
+script = ExtResource("1_fbhfq")
+action = &"analog_look_left"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_x7jqk"), SubResource("InputEventJoypadMotion_o2su3")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_4kncb"]
+device = -1
+physical_keycode = 76
+unicode = 108
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_k025w"]
+axis = 2
+axis_value = 1.0
+
+[sub_resource type="Resource" id="Resource_c1o8d"]
+script = ExtResource("1_fbhfq")
+action = &"analog_look_right"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_4kncb"), SubResource("InputEventJoypadMotion_k025w")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_4wrp4"]
+device = -1
+physical_keycode = 73
+unicode = 105
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_sfi1q"]
+axis = 3
+axis_value = -1.0
+
+[sub_resource type="Resource" id="Resource_gkigt"]
+script = ExtResource("1_fbhfq")
+action = &"analog_look_up"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_4wrp4"), SubResource("InputEventJoypadMotion_sfi1q")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_x4qho"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_68tr7"]
+axis_value = 1.0
+
+[sub_resource type="Resource" id="Resource_namy3"]
+script = ExtResource("1_fbhfq")
+action = &"analog_right"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_x4qho"), SubResource("InputEventJoypadMotion_68tr7")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_f4nfa"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
+[sub_resource type="Resource" id="Resource_4kncb"]
+script = ExtResource("1_fbhfq")
+action = &"ascend"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_f4nfa")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_8j1ke"]
+device = -1
+physical_keycode = 4194326
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_q8ng3"]
+button_index = 1
+pressed = true
+
+[sub_resource type="Resource" id="Resource_m7tkj"]
+script = ExtResource("1_fbhfq")
+action = &"crouch"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_8j1ke"), SubResource("InputEventJoypadButton_q8ng3")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_cdx34"]
+device = -1
+physical_keycode = 81
+unicode = 113
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_t3yo1"]
+button_index = 1
+pressed = true
+
+[sub_resource type="Resource" id="Resource_k025w"]
+script = ExtResource("1_fbhfq")
+action = &"descend"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_cdx34"), SubResource("InputEventJoypadButton_t3yo1")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_1qhob"]
+device = -1
+physical_keycode = 71
+unicode = 103
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_gkigt"]
+button_index = 12
+pressed = true
+
+[sub_resource type="Resource" id="Resource_x45lq"]
+script = ExtResource("1_fbhfq")
+action = &"drop"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_1qhob"), SubResource("InputEventJoypadButton_gkigt")])
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_axpwb"]
+device = -1
+button_index = 1
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_7saap"]
+axis = 5
+axis_value = 1.0
+
+[sub_resource type="Resource" id="Resource_mtry5"]
+script = ExtResource("1_fbhfq")
+action = &"fire1"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventMouseButton_axpwb"), SubResource("InputEventJoypadMotion_7saap")])
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_v5fta"]
+device = -1
+button_index = 2
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_md2vp"]
+axis = 4
+axis_value = 1.0
+
+[sub_resource type="Resource" id="Resource_i8h46"]
+script = ExtResource("1_fbhfq")
+action = &"fire2"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventMouseButton_v5fta"), SubResource("InputEventJoypadMotion_md2vp")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_j7k7l"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_38vjl"]
+button_index = 2
+pressed = true
+
+[sub_resource type="Resource" id="Resource_whqwq"]
+script = ExtResource("1_fbhfq")
+action = &"interact"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_j7k7l"), SubResource("InputEventJoypadButton_38vjl")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_smhuj"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_knh88"]
+pressed = true
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7uv1s"]
+button_index = 9
+pressed = true
+
+[sub_resource type="Resource" id="Resource_2813p"]
+script = ExtResource("1_fbhfq")
+action = &"jump"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_smhuj"), SubResource("InputEventJoypadButton_knh88"), SubResource("InputEventJoypadButton_7uv1s")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_7r4g5"]
+device = -1
+physical_keycode = 81
+unicode = 113
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_mf1v1"]
+button_index = 3
+pressed = true
+
+[sub_resource type="Resource" id="Resource_1qhob"]
+script = ExtResource("1_fbhfq")
+action = &"last_item"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_7r4g5"), SubResource("InputEventJoypadButton_mf1v1")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_oafdu"]
+device = -1
+physical_keycode = 82
+unicode = 114
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_in0yl"]
+button_index = 2
+pressed = true
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ag2lo"]
+button_index = 10
+pressed = true
+
+[sub_resource type="Resource" id="Resource_5iscs"]
+script = ExtResource("1_fbhfq")
+action = &"reload"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_oafdu"), SubResource("InputEventJoypadButton_in0yl"), SubResource("InputEventJoypadButton_ag2lo")])
+
+[sub_resource type="InputEventKey" id="InputEventKey_kphbk"]
+device = -1
+physical_keycode = 4194325
+
+[sub_resource type="Resource" id="Resource_k7phe"]
+script = ExtResource("1_fbhfq")
+action = &"walk"
+deadzone = 0.2
+events = Array[InputEvent]([SubResource("InputEventKey_kphbk")])
+
+[resource]
+script = ExtResource("1_ddlck")
+actions = Dictionary[StringName, ExtResource("1_fbhfq")]({
+&"analog_back": SubResource("Resource_wfeiw"),
+&"analog_forward": SubResource("Resource_fbhfq"),
+&"analog_left": SubResource("Resource_30nql"),
+&"analog_look_down": SubResource("Resource_x7jqk"),
+&"analog_look_left": SubResource("Resource_o2su3"),
+&"analog_look_right": SubResource("Resource_c1o8d"),
+&"analog_look_up": SubResource("Resource_gkigt"),
+&"analog_right": SubResource("Resource_namy3"),
+&"ascend": SubResource("Resource_4kncb"),
+&"crouch": SubResource("Resource_m7tkj"),
+&"descend": SubResource("Resource_k025w"),
+&"drop": SubResource("Resource_x45lq"),
+&"fire1": SubResource("Resource_mtry5"),
+&"fire2": SubResource("Resource_i8h46"),
+&"interact": SubResource("Resource_whqwq"),
+&"jump": SubResource("Resource_2813p"),
+&"last_item": SubResource("Resource_1qhob"),
+&"reload": SubResource("Resource_5iscs"),
+&"walk": SubResource("Resource_k7phe")
+})
+metadata/_custom_type_script = "uid://b64tbdxswb82r"

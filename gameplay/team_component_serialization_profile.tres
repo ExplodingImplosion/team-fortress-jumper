@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="NetworkedNode" load_steps=5 format=3 uid="uid://c2qaab3whhan6"]
+
+[ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="1_w47px"]
+[ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="2_psqjl"]
+[ext_resource type="Script" uid="uid://cntc13cnoy7sw" path="res://gameplay/team_component.gd" id="3_442hm"]
+
+[sub_resource type="Resource" id="Resource_ldyvk"]
+script = ExtResource("1_w47px")
+name = &"team_id"
+type = 2
+interp_type = 1
+
+[resource]
+script = ExtResource("2_psqjl")
+source_script = ExtResource("3_442hm")
+properties = Array[ExtResource("1_w47px")]([SubResource("Resource_ldyvk")])
+metadata/_custom_type_script = "uid://cdcaujmtsbgia"

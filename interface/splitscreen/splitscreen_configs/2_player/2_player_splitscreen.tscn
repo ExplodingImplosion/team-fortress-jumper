@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://jf61aayu7bco"]
+
+[ext_resource type="Script" uid="uid://cpkle8uclgud7" path="res://interface/splitscreen/splitscreen_viewport_manager.gd" id="1_momxu"]
+[ext_resource type="PackedScene" uid="uid://d3k7iw5ovffoa" path="res://interface/splitscreen/splitscreen_container.tscn" id="1_o5vt6"]
+
+[node name="ViewportManager" type="FlowContainer"]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+last_wrap_alignment = 2
+script = ExtResource("1_momxu")
+
+[node name="Viewport1" parent="." instance=ExtResource("1_o5vt6")]
+layout_mode = 2
+
+[node name="SubViewport" parent="Viewport1" index="0"]
+size = Vector2i(1152, 324)
+
+[node name="Viewport2" parent="." instance=ExtResource("1_o5vt6")]
+layout_mode = 2
+
+[node name="SubViewport" parent="Viewport2" index="0"]
+size = Vector2i(1152, 324)
+
+[editable path="Viewport1"]
+[editable path="Viewport2"]

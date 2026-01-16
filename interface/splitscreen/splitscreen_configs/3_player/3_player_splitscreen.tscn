@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://drj0g37vnernr"]
+
+[ext_resource type="PackedScene" uid="uid://jf61aayu7bco" path="res://interface/splitscreen/splitscreen_configs/2_player/2_player_splitscreen.tscn" id="1_w41ji"]
+[ext_resource type="PackedScene" uid="uid://d3k7iw5ovffoa" path="res://interface/splitscreen/splitscreen_container.tscn" id="2_1y0uk"]
+
+[node name="ViewportManager" instance=ExtResource("1_w41ji")]
+
+[node name="SubViewport" parent="Viewport2" index="0"]
+size = Vector2i(576, 324)
+
+[node name="Viewport3" parent="." index="2" instance=ExtResource("2_1y0uk")]
+layout_mode = 2
+
+[node name="SubViewport" parent="Viewport3" index="0"]
+size = Vector2i(576, 324)
+
+[editable path="Viewport1"]
+[editable path="Viewport2"]
+[editable path="Viewport3"]

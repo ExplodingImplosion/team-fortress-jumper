@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5kvi1lydf6rw"]
+
+[ext_resource type="PackedScene" uid="uid://jf61aayu7bco" path="res://interface/splitscreen/splitscreen_configs/2_player/2_player_splitscreen.tscn" id="1_l2qg6"]
+
+[node name="ViewportManager" instance=ExtResource("1_l2qg6")]
+
+[node name="SubViewport" parent="Viewport1" index="0"]
+size = Vector2i(576, 648)
+
+[node name="SubViewport" parent="Viewport2" index="0"]
+size = Vector2i(576, 648)
+
+[editable path="Viewport1"]
+[editable path="Viewport2"]
