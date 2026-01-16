@@ -370,7 +370,7 @@ static func get_localhost_hostname() -> String:
 	return IP.resolve_hostname(localhost)
 
 static func on_peer_disconnected(peer_id: int) -> void:
-	Console.write("Peer %s disconnected."%[peer_id])
+	Console.broadcast("Peer %s disconnected."%peer_id)
 	MultiplayerSession.remove_client(peer_id)
 	#if GameState.clients.has(peer_id):
 		#GameState.remove_client(peer_id)
@@ -403,7 +403,7 @@ static func on_server_disconnected() -> void:
 	reset.call_deferred()
 
 static func on_peer_connected(peer_id: int) -> void:
-	Console.write("Peer %s connected."%[peer_id])
+	Console.broadcast("Peer %s connected."%peer_id)
 	Console.push_warn("Normally would check if gamestate can accept a new client here")
 	NetworkPackets.ServerInfoPacket.send_to_client(peer_id)
 	MultiplayerSession.add_client(peer_id,0)
