@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://boq0lj8pmjb4e"]
+
+[ext_resource type="Script" uid="uid://do84hite8cnr1" path="res://interface/splitscreen/splitscreen_viewport_manager/splitscreen_viewport_manager.gd" id="1_dau51"]
+
+[node name="ViewportManager" type="FlowContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+last_wrap_alignment = 2
+script = ExtResource("1_dau51")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5i0ej3sma2re"]
+
+[ext_resource type="Script" uid="uid://bf2tu74vhntwp" path="res://interface/replay_interface/replay_interface.gd" id="1_w7qjv"]
+
+[node name="ReplayInterface" type="Control"]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w7qjv")
+
+[node name="PlaybackButtonsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.82098764
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 288.0
+offset_right = -288.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="FirstFrame" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+text = "First frame"
+
+[node name="GoBack" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+text = "Go back"
+
+[node name="PrevFrame" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+text = "Prev frame"
+
+[node name="PauseButton" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Pause/Play"
+
+[node name="NextFrame" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+text = "Next frame"
+
+[node name="GoForward" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+text = "Go forward"
+
+[node name="LastFrame" type="Button" parent="PlaybackButtonsContainer"]
+layout_mode = 2
+text = "Last frame"
+
+[connection signal="pressed" from="PlaybackButtonsContainer/LastFrame" to="." method="go_to_last_frame"]

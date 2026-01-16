@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dltyisfoybkjm"]
+
+[ext_resource type="FontFile" uid="uid://dhkjl8wysrnqe" path="res://interface/fonts/montserrat-extrabold.ttf" id="1_v3ju4"]
+[ext_resource type="Script" uid="uid://clqndmurvvxak" path="res://utils/stringify_component.gd" id="2_uuqb7"]
+
+[node name="StringifyComponent" type="Label3D"]
+billboard = 1
+shaded = true
+double_sided = false
+alpha_cut = 1
+text = "Sample Text"
+font = ExtResource("1_v3ju4")
+outline_size = 5
+script = ExtResource("2_uuqb7")

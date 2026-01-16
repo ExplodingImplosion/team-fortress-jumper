@@ -1,0 +1,973 @@
+[gd_scene load_steps=5 format=3 uid="uid://co5urtol4l8vi"]
+
+[ext_resource type="Script" uid="uid://cwmku3mocrqcl" path="res://interface/perf_overlay/perf_overlay.gd" id="1_mqj36"]
+[ext_resource type="StyleBox" uid="uid://dwoc0dj6osfw3" path="res://interface/perf_overlay/perf_overlay_background.tres" id="2_0hsfq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xneog"]
+bg_color = Color(0.219608, 0.219608, 0.219608, 1)
+border_width_right = 150
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0ki2"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="PerformanceOverlay" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_mqj36")
+
+[node name="containercontainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="container" type="HFlowContainer" parent="containercontainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="fpscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/fpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "FPS:"
+
+[node name="readout" type="Label" parent="containercontainer/container/fpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 4
+
+[node name="advancedfpscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/advancedfpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "aFPS:"
+
+[node name="readout" type="Label" parent="containercontainer/container/advancedfpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 4
+
+[node name="renderfpscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/renderfpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "rFPS:"
+
+[node name="readout" type="Label" parent="containercontainer/container/renderfpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 5
+
+[node name="cpurendercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/cpurendercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "CPU Render Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/cpurendercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="gpurendercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/gpurendercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "GPU Render Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/gpurendercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="framesetupcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/framesetupcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Frame Setup CPU Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/framesetupcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="rendertimecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/rendertimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Total Render Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/rendertimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="quackfpscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/quackfpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "QFPS:"
+
+[node name="readout" type="Label" parent="containercontainer/container/quackfpscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 4
+
+[node name="interpcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/interpcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Interp Fraction:"
+
+[node name="readout" type="Label" parent="containercontainer/container/interpcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="interpbarcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/interpbarcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Interp Bar:"
+
+[node name="readout" type="ProgressBar" parent="containercontainer/container/interpbarcontainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_xneog")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y0ki2")
+max_value = 1.0
+show_percentage = false
+
+[node name="framedelaycontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/framedelaycontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Network Frame Delay:"
+
+[node name="readout" type="Label" parent="containercontainer/container/framedelaycontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="timebehindservercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/timebehindservercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Time Behind Server:"
+
+[node name="readout" type="Label" parent="containercontainer/container/timebehindservercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="netinputdelaycontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/netinputdelaycontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Network Input Delay:"
+
+[node name="readout" type="Label" parent="containercontainer/container/netinputdelaycontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="serverbuffercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/serverbuffercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Server Input Buffer:"
+
+[node name="readout" type="Label" parent="containercontainer/container/serverbuffercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="totalinputdelaycontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/totalinputdelaycontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Total Input Delay:"
+
+[node name="readout" type="Label" parent="containercontainer/container/totalinputdelaycontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="serverframecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/serverframecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Server Frame:"
+
+[node name="readout" type="Label" parent="containercontainer/container/serverframecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="mostrecentackedframecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/mostrecentackedframecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Most Recent Acked Frame:"
+
+[node name="readout" type="Label" parent="containercontainer/container/mostrecentackedframecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="inputsignaturecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/inputsignaturecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Input Signature:"
+
+[node name="readout" type="Label" parent="containercontainer/container/inputsignaturecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="ackedinputsignaturecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/ackedinputsignaturecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Acked Input Signature:"
+
+[node name="readout" type="Label" parent="containercontainer/container/ackedinputsignaturecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="serverinputsignaturecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/serverinputsignaturecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Server Input Signature:"
+
+[node name="readout" type="Label" parent="containercontainer/container/serverinputsignaturecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="inputbufferoffsetcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/inputbufferoffsetcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Input Buffer Offset:"
+
+[node name="readout" type="Label" parent="containercontainer/container/inputbufferoffsetcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="updownscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/updownscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Updowns:"
+
+[node name="readout" type="Label" parent="containercontainer/container/updownscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetpacketlosscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetpacketlosscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet Packet Loss:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetpacketlosscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetpacketlossvariancecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetpacketlossvariancecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet Packet Loss Variance:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetpacketlossvariancecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetrttcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetrttcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet RTT:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetrttcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetjittercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetjittercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet Jitter:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetjittercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetlastrttcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetlastrttcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet Last RTT:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetlastrttcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetlastjittercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetlastjittercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet last Jitter:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetlastjittercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="enetepochintervalcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/enetepochintervalcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "ENet Statistic Epoch Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/enetepochintervalcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="deltacontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/deltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Tick Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/deltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physdeltacontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physdeltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Tick Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physdeltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="quackphysdeltacontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/quackphysdeltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Quack Physics Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/quackphysdeltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="quackdeltacontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/quackdeltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Quack Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/quackdeltacontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="processtimecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/processtimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Process Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/processtimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="estimatedcputimecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/estimatedcputimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Estimated Game Process Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/estimatedcputimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physprocesstimecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physprocesstimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Process Time:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physprocesstimecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="processdeltatimediffcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/processdeltatimediffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Process Delta/Time Diff:"
+
+[node name="readout" type="Label" parent="containercontainer/container/processdeltatimediffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="processquackdeltadiffcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/processquackdeltadiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Process/Quack Delta Diff:"
+
+[node name="readout" type="Label" parent="containercontainer/container/processquackdeltadiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicsprocesstimedeltadiffcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicsprocesstimedeltadiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Process Time/Delta Diff:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicsprocesstimedeltadiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicsprocessratecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicsprocessratecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Process Rate:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicsprocessratecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="netupdateratecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/netupdateratecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Net Update Rate:"
+
+[node name="readout" type="Label" parent="containercontainer/container/netupdateratecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="netupdatejittercontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/netupdatejittercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Net Update Jitter:"
+
+[node name="readout" type="Label" parent="containercontainer/container/netupdatejittercontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicsnetdiffcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicsnetdiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Net Update/Physics Process Diff:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicsnetdiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicsprocessoffsetcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicsprocessoffsetcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Process Offset:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicsprocessoffsetcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="netupdateoffsetcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/netupdateoffsetcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Net Update Offset:"
+
+[node name="readout" type="Label" parent="containercontainer/container/netupdateoffsetcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicsprocessnetupdateoffsetdiffcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicsprocessnetupdateoffsetdiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Net Update/Physics Process Offset Diff:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicsprocessnetupdateoffsetdiffcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="processtimedeferredcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/processtimedeferredcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Process Deferred Time Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/processtimedeferredcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicstimedeferredcontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicstimedeferredcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Deferred Time Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicstimedeferredcontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="processtimeidlecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/processtimeidlecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Process Idle Time Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/processtimeidlecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="physicstimeidlecontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/physicstimeidlecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Physics Idle Time Delta:"
+
+[node name="readout" type="Label" parent="containercontainer/container/physicstimeidlecontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="activethreadscontainer" type="HBoxContainer" parent="containercontainer/container"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/activethreadscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "Num active threads:"
+
+[node name="readout" type="Label" parent="containercontainer/container/activethreadscontainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="test" type="HBoxContainer" parent="containercontainer/container"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="containercontainer/container/test"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+text = "test: "
+
+[node name="readout" type="Label" parent="containercontainer/container/test"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_0hsfq")
+visible_characters = 7
+
+[node name="gpuboundnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "GPU bound"
+
+[node name="cpuboundnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "CPU bound"
+
+[node name="processboundnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Process bottleneck"
+
+[node name="physicsboundnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Physics process bottleneck"
+
+[node name="physprocessboundnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Physics process bottlenecking process"
+
+[node name="processphysboundnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Process bottlenecking physics process"
+
+[node name="inconsistentphysicsnoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Inconsistent physics update rate"
+
+[node name="bigserverbuffernoti" type="Label" parent="containercontainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.372549, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Huge server input buffer"
