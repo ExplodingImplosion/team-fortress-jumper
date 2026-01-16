@@ -38,7 +38,9 @@ func play_for_surface(volume: float):
 	# HACK: Find a floor to further down than reasonable.
 	# The footsteps can only ever happen when grounded, anyway.
 	var feet_collision := player.move_and_collide(Vector3.DOWN * 10, true)
-	assert(feet_collision)
+	if not feet_collision:
+		Console.push_err("No feet collision on physics frame %s mp frame num %s predicting %s"%[Engine.get_physics_frames(),Quack.Network.MultiplayerSession.frame_num,Quack.Network.MultiplayerSession.predicting]); return
+	#assert(feet_collision)
 	
 	var surface_type := get_surface_type(feet_collision.get_collider(0))
 	stream = SURFACE_MAP.get(surface_type, preload("res://sfx/common/crit_hit1.ogg"))
