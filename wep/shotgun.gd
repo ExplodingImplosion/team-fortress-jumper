@@ -32,6 +32,10 @@ func _deploy():
 	if not first_person_player.animation_finished.is_connected(_on_FirstPersonPlayer_animation_finished):
 		first_person_player.animation_finished.connect(_on_FirstPersonPlayer_animation_finished)
 
+const HitResolver = preload("res://network/multiplayer/hit_resolver.gd")
+const OwnerID = Quack.Network.OwnerID
+const BoundingBox = HitResolver.BoundingBox
+
 func _shoot():
 	const SHOOT_ANIMATIONS = [&"shotgun_fire", &"shotgun_fire_nopump"]
 	shoot_sfx.play()
@@ -39,9 +43,33 @@ func _shoot():
 	first_person_player.play(SHOOT_ANIMATIONS.pick_random())
 	
 	for i in BULLET_SPREAD_BASE_OFFSETS.size():
-		_create_bullet(BULLET_SPREAD_BASE_OFFSETS[i], i == 0)
+		if HitResolver.is_valid_hit_resolution_subject(player_owner):
+			HitResolver.hit_resolver.request_hit(
+				OwnerID.get_node_owner_id(player_owner),
+				self,
+				_create_bullet.bind(BULLET_SPREAD_BASE_OFFSETS[i], i == 0),
+				BoundingBox.get_ray_intersection_intersections(
+					get_world_3d(),
+					get_raycast_query(BULLET_SPREAD_BASE_OFFSETS[i], i == 0)
+				)
+			)
+		else:
+			_create_bullet(BULLET_SPREAD_BASE_OFFSETS[i], i == 0)
+
+func get_raycast_query(base_offset := Vector2.ZERO, first_bullet := false) -> PhysicsRayQueryParameters3D:
+	var spread := Vector2.ZERO if first_bullet else Vector2(
+			randfn(0, inaccuracy), 
+			randfn(0, inaccuracy))
+	var ahead := -global_transform.basis.z.rotated(
+			global_transform.basis.y, base_offset.y + spread.y).rotated(
+			global_transform.basis.x, base_offset.x + spread.x)
+	
+	var from := global_position
+	var to := from + (ahead * 10000 * HU)
+	return PhysicsRayQueryParameters3D.create(from, to, 0xFFFFFFFF, [player_owner])
 
 func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
+	
 	var spread := Vector2.ZERO if first_bullet else Vector2(
 			randfn(0, inaccuracy), 
 			randfn(0, inaccuracy))

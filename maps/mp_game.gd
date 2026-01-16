@@ -1,6 +1,7 @@
 extends Node
 
 const PlayerScene = preload("res://player/Player.tscn")
+const MPSesh = Quack.Network.MultiplayerSession
 
 const PORT = 8002
 const SERVER_ADDRESS = "localhost"
@@ -24,7 +25,7 @@ var map: Node
 
 func _unhandled_input(event):
 	if event.is_action_pressed("debug_spawn_fake_player") and multiplayer.is_server():
-		spawn_player.rpc(0)
+		spawn_player(0)
 		get_viewport().set_input_as_handled()
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
@@ -46,55 +47,29 @@ func _unhandled_input(event):
 				else:
 					map_scene = load("res://maps/ItemTest.tscn")
 
+func on_player_readied(player: Quack.Network.MultiplayerSession.QuackPlayer) -> void:
+	spawn_player(player.id)
+
+func on_player_removed(player: Quack.Network.MultiplayerSession.QuackPlayer) -> void:
+	remove_player(player.id)
+
 func _ready() -> void:
 	tweak_window()
 	
-	var args := OS.get_cmdline_args()
+	await Quack.Network.await_packets_ready()
 	
-	if args.has("listen"):
-		await _host()
-		multiplayer.peer_connected.connect(func(id): chat.broadcast("Client %s connected" % id))
-		multiplayer.peer_disconnected.connect(func(id): chat.broadcast("Client %s disconnected" % id))
-	
-	elif args.has("join"):
-		await _connect()
-	
-	multiplayer.peer_connected.connect(spawn_player)
-	multiplayer.peer_disconnected.connect(remove_player)
+	MPSesh.player_readied.connect(on_player_readied)
+	MPSesh.player_removed.connect(on_player_removed)
 	multiplayer.server_disconnected.connect(_start_close_countdown)
 	
-	spawn_player.call_deferred(multiplayer.get_unique_id())
 	for i in 5:
 		await Quack.tree.process_frame
 	$PlayerDebugger.player = get_node(str(multiplayer.get_unique_id()))
 	
 	if not multiplayer.is_server():
 		await multiplayer.peer_connected
-	set_peer_name.rpc(args_dict.get("name", ""))
+	set_peer_name(args_dict.get("name", ""))
 
-
-func _host():
-	var peer := ENetMultiplayerPeer.new()
-	var err := peer.create_server(PORT)
-	if err:
-		printerr("Could not create server: ", error_string(err))
-	else:
-		print("Hosting server at port ", PORT)
-		multiplayer.multiplayer_peer = peer
-
-func _connect():
-	await get_tree().create_timer(0.25).timeout
-	
-	var peer := ENetMultiplayerPeer.new()
-	var err := peer.create_client(SERVER_ADDRESS, PORT)
-	if err:
-		printerr("Could not connect to server at ", SERVER_ADDRESS, ":", PORT, " ", error_string(err))
-	else:
-		print("Successfully connected to server at ", SERVER_ADDRESS, ":", PORT)
-		multiplayer.multiplayer_peer = peer
-		#peer.set_target_peer(SERVER_ID) # I don't know.
-
-@rpc("any_peer", "call_local", "reliable")
 func set_peer_name(new_name: String):
 	if not multiplayer.is_server():
 		return
@@ -104,15 +79,13 @@ func set_peer_name(new_name: String):
 	var sender_id := multiplayer.get_remote_sender_id()
 	Chat.name_dict[sender_id] = new_name
 
-@rpc("authority", "call_local", "reliable")
 func spawn_player(id: int):
-	var is_fake_player := id == 0
 	
 	var player: Player = PlayerScene.instantiate()
 	player.name = str(id)
-	player.set_multiplayer_authority(SERVER_ID if is_fake_player else id)
 	
 	add_child(player, true)
+	Quack.Network.OwnerID.add_node_owner(player,id)
 	if id == multiplayer.get_unique_id():
 		Player.local = player
 	else:

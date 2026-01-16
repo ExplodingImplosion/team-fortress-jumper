@@ -17,8 +17,8 @@ var trigger_action := "player_primary"
 		
 		active = new
 		# When holding down the button, shoot again as soon as possible.
-		if active and Input.is_action_pressed(trigger_action):
-			shoot.rpc()
+		if active and Inputs.get_player_inputs(Quack.Network.OwnerID.get_node_player_owner(owner)).is_action_pressed(trigger_action):
+			shoot()
 enum Type { PRIMARY, SECONDARY, MELEE, EQUIPPABLE }
 @export var type := Type.PRIMARY
 
@@ -30,13 +30,10 @@ enum Type { PRIMARY, SECONDARY, MELEE, EQUIPPABLE }
 
 var first_person_player: AnimationPlayer
 
+func _physics_process(_delta: float) -> void:
+	if Inputs.get_player_inputs(Quack.Network.OwnerID.get_node_player_owner(owner)).is_action_pressed(trigger_action):
+		shoot()
 
-func _unhandled_input(event):
-	if event.is_action_pressed(trigger_action):
-		# TODO: Try testing rpc_id(1) with this.
-		shoot.rpc()
-
-@rpc("authority", "call_local", "reliable")
 func shoot():
 	# FIXME: Due to lag and the timer being off-sync, the shoot RPC often fails in multiplayer.
 	if not active or (_interval_timer and _interval_timer.time_left > 0.0):
@@ -48,7 +45,6 @@ func shoot():
 	_shoot()
 	emit_signal("shot")
 
-@rpc("authority", "call_local", "reliable")
 func deploy():
 	if fp_model:
 		fp_model.show()
@@ -72,7 +68,7 @@ func refresh_interval():
 	_interval_timer.timeout.connect(func():
 			_ready_to_shoot()
 			# When holding down the button, shoot again as soon as possible.
-			if Input.is_action_pressed(trigger_action): shoot.rpc()
+			if Inputs.get_player_inputs(Quack.Network.OwnerID.get_node_player_owner(owner)).is_action_pressed(trigger_action): shoot()
 	)
 
 ## Overridable. Called when deploying this weapon.

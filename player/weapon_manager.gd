@@ -12,25 +12,26 @@ const DEPLOY_TIME = 0.5
 @export var melee_weapon: WeaponNode
 
 @export var held_weapon: WeaponNode: set = switch_to
+var held_idx: int
 
 
 @onready var deploy_timer: Timer = $Deploy
 
 
-func _unhandled_input(event):
-	if event.is_action_pressed("player_switch_to_primary"):
-		switch_to_by_path.rpc(primary_weapon.get_path())
-	elif event.is_action_pressed("player_switch_to_secondary"):
-		switch_to_by_path.rpc(secondary_weapon.get_path())
-	elif event.is_action_pressed("player_switch_to_melee"):
-		switch_to_by_path.rpc(melee_weapon.get_path())
-	
-	# Additional weapons for further, funny testing.
-	if event is InputEventKey:
-		match event.keycode:
-			KEY_4:
-				switch_to_by_path.rpc("GrenadeLauncher")
+func process_inputs(inputs: Inputs.PlayerInputs):
+	if inputs.is_action_pressed("player_switch_to_primary"):
+		switch_to_by_path(primary_weapon.get_path())
+	elif inputs.is_action_pressed("player_switch_to_secondary"):
+		switch_to_by_path(secondary_weapon.get_path())
+	elif inputs.is_action_pressed("player_switch_to_melee"):
+		switch_to_by_path(melee_weapon.get_path())
+	elif inputs.is_action_pressed("player_switch_to_4"):
+		switch_to_by_path("GrenadeLauncher")
 
+func _physics_process(_delta: float) -> void:
+	var inputs := Inputs.get_player_inputs(Quack.Network.OwnerID.get_node_player_owner(owner))
+	if inputs:
+		process_inputs(inputs)
 
 func _ready() -> void:
 	deploy_timer.timeout.connect(activate_held_weapon)
@@ -50,9 +51,30 @@ func _ready() -> void:
 			wep.deployed.connect(tp_anim_tree._on_any_weapon_deployed.bind(wep.type))
 			wep.shot.connect(tp_anim_tree._on_any_weapon_shot)
 
+func on_updated() -> void:
+	if held_idx != get_weapon_index(held_weapon):
+		switch_to(get_weapon_by_index(held_idx))
 
-# You cannot pass a whole Object remotely, hence why this exists.
-@rpc("authority", "call_local", "reliable")
+func get_weapon_by_index(idx: int) -> WeaponNode:
+	match idx:
+		0:
+			return primary_weapon
+		1:
+			return secondary_weapon
+		2:
+			return melee_weapon
+	return null
+
+func get_weapon_index(weapon: WeaponNode) -> int:
+	match weapon:
+		primary_weapon:
+			return 0
+		secondary_weapon:
+			return 1
+		melee_weapon:
+			return 2
+	return -1
+
 func switch_to_by_path(path: NodePath):
 	switch_to(get_node(path))
 
@@ -73,8 +95,9 @@ func switch_to(wep: WeaponNode):
 	
 	if held_weapon:
 		held_weapon.deploy()
+		held_idx = get_weapon_index(held_weapon)
 	else:
-		printerr("Switched to holding no weapon!")
+		Console.writerr("Switched to holding no weapon!")
 	
 
 func activate_held_weapon():

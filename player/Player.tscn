@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://bp3faj46c64ck"]
+[gd_scene load_steps=93 format=3 uid="uid://bp3faj46c64ck"]
 
 [ext_resource type="Script" uid="uid://ralk8skbs5p3" path="res://player/Player.gd" id="1"]
 [ext_resource type="Script" uid="uid://cqeexyt8opffs" path="res://wep/rocket_launcher.gd" id="2_eytv3"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://824byn35wkj0" path="res://sfx/primary/rocket_jumper_shoot.ogg" id="4_6revy"]
 [ext_resource type="PackedScene" uid="uid://cw116s8st8i27" path="res://wep/models/rocket_launcher.glb" id="4_fpnlp"]
 [ext_resource type="Script" uid="uid://bcmj5coy5nnpn" path="res://wep/charging_shield.gd" id="5_k3wqx"]
+[ext_resource type="Script" uid="uid://d0juwtbi2mp3d" path="res://shared/networked_timer.gd" id="5_lnwue"]
 [ext_resource type="AudioStream" uid="uid://c6j2eqvfvvcc4" path="res://sfx/primary/primary_draw.ogg" id="5_ud5jp"]
 [ext_resource type="Material" uid="uid://bcyjpdmg18bqa" path="res://wep/models/rocket_launcher_mat.tres" id="5_w6h5j"]
 [ext_resource type="Script" uid="uid://bwsn5huuoojxe" path="res://wep/shotgun.gd" id="7_3qfhg"]
@@ -37,6 +38,9 @@
 [ext_resource type="Resource" uid="uid://ctd5cwdf2x17t" path="res://wep/weapon_node_serialization_profile.tres" id="37_vud74"]
 [ext_resource type="Resource" uid="uid://dtgaspqx6vgt5" path="res://shared/timer_serialization_profile.tres" id="38_610ub"]
 [ext_resource type="AudioStream" uid="uid://cqwxehsek2xdy" path="res://sfx/common/rocket_jump_wind.ogg" id="40_4f14b"]
+[ext_resource type="Script" uid="uid://dk4wa2qc0mihq" path="res://gameplay/owner_id.gd" id="40_ayguc"]
+[ext_resource type="Resource" uid="uid://dp6t5564uswgn" path="res://shared/owner_id_serialization_profile.tres" id="40_t7u8x"]
+[ext_resource type="Script" uid="uid://ddl86p2x31hc0" path="res://gameplay/network_bounding_box_component.gd" id="43_7tnb4"]
 [ext_resource type="AudioStream" uid="uid://chi7fdkssts2p" path="res://sfx/common/footstep/concrete.tres" id="44_w36ex"]
 [ext_resource type="Script" uid="uid://cy8k051va8lv7" path="res://player/footstep_manager.gd" id="48_wpo5q"]
 
@@ -272,24 +276,34 @@ sub_property_index = 1
 rotation = true
 metadata/_custom_type_script = "uid://r12jyvgis0ul"
 
+[sub_resource type="Resource" id="Resource_wqfsd"]
+script = ExtResource("36_uyl0s")
+name = &"global_rotation"
+type = 9
+precision_level = 2
+sub_property_index = 0
+rotation = true
+metadata/_custom_type_script = "uid://r12jyvgis0ul"
+
 [sub_resource type="Resource" id="Resource_8cy8x"]
 resource_name = "View Pivot"
 script = ExtResource("35_y2u3w")
 source_script = ExtResource("3_610ub")
-properties = Array[ExtResource("36_uyl0s")]([SubResource("Resource_pcftw"), SubResource("Resource_wpul2")])
+properties = Array[ExtResource("36_uyl0s")]([SubResource("Resource_pcftw"), SubResource("Resource_wpul2"), SubResource("Resource_wqfsd")])
 metadata/_custom_type_script = "uid://cdcaujmtsbgia"
 
-[sub_resource type="Resource" id="Resource_kx2m0"]
+[sub_resource type="Resource" id="Resource_7wro5"]
 script = ExtResource("36_uyl0s")
-name = &"held_weapon"
-type = 24
+name = &"held_idx"
+type = 2
+precision_level = 7
 interp_type = 1
 
 [sub_resource type="Resource" id="Resource_610ub"]
 resource_name = "Weapon Manager"
 script = ExtResource("35_y2u3w")
 source_script = ExtResource("15_m23wc")
-properties = Array[ExtResource("36_uyl0s")]([SubResource("Resource_kx2m0")])
+properties = Array[ExtResource("36_uyl0s")]([SubResource("Resource_7wro5")])
 metadata/_custom_type_script = "uid://cdcaujmtsbgia"
 
 [sub_resource type="Resource" id="Resource_lnwue"]
@@ -384,6 +398,7 @@ held_weapon = NodePath("RocketLauncher")
 [node name="Deploy" type="Timer" parent="Pivot/WeaponManager"]
 process_callback = 0
 one_shot = true
+script = ExtResource("5_lnwue")
 
 [node name="RocketLauncher" type="Node3D" parent="Pivot/WeaponManager"]
 script = ExtResource("2_eytv3")
@@ -611,8 +626,20 @@ one_shot = true
 
 [node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
 script = ExtResource("34_lhjxl")
-serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x")])
-nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield")]
+serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x"), ExtResource("40_t7u8x")])
+nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID")]
+
+[node name="OwnerID" type="Node" parent="."]
+script = ExtResource("40_ayguc")
+
+[node name="BoundingBox" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh")]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("43_7tnb4")
+mesh = NodePath("../BodyModel/TPSkeleton/soldier_model")
+
+[connection signal="updated" from="Serializer" to="Pivot/WeaponManager" method="on_updated"]
+[connection signal="owner_changed" from="OwnerID" to="." method="_update_for_local_player"]
 
 [editable path="Pivot/FirstPersonModel"]
 [editable path="Pivot/WeaponManager/RocketLauncher/FPModel"]

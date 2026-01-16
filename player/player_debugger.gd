@@ -219,6 +219,7 @@ static func m_to_hu(value: Variant) -> Variant:
 #region Debug Menu
 @warning_ignore_start("int_as_enum_without_cast", "int_as_enum_without_match")
 func _populate_debug_menu():
+	if not player: return
 	if menu.item_count > 0:
 		return # Already populated.
 	

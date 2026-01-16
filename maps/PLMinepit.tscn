@@ -1,5 +1,6 @@
-[gd_scene load_steps=2490 format=4 uid="uid://m28giuj5awu4"]
+[gd_scene load_steps=2491 format=4 uid="uid://m28giuj5awu4"]
 
+[ext_resource type="Script" uid="uid://bktl4pck7pyrf" path="res://gameplay/level/common/multiplayer_level.gd" id="1_btnjo"]
 [ext_resource type="LightmapGIData" uid="uid://cp6idk5w2hykj" path="res://maps/pl_minepit.lmbake" id="1_h132o"]
 [ext_resource type="Script" uid="uid://dx300m3c4fro5" path="res://addons/godotvmf/src/vmf_node.gd" id="2_ja2at"]
 [ext_resource type="ArrayMesh" uid="uid://bcb6af7r4dctt" path="res://maps/geometry/pl_minepit_vmf_import.mesh" id="3_uomta"]
@@ -25322,6 +25323,7 @@ blend_shape_mode = 0
 data = PackedVector3Array(-6.0959997, 3.6576, -21.945599, -6.0959997, 3.6576, -22.555199, -6.0959997, 4.2672, -22.555199, -6.0959997, 3.6576, -21.945599, -6.0959997, 4.2672, -22.555199, -6.0959997, 4.2672, -21.945599, -5.4863997, 3.6576, -22.555199, -5.4863997, 3.6576, -21.945599, -5.4863997, 4.2672, -21.945599, -5.4863997, 3.6576, -22.555199, -5.4863997, 4.2672, -21.945599, -5.4863997, 4.2672, -22.555199, -5.4863997, 3.6576, -21.945599, -6.0959997, 3.6576, -21.945599, -6.0959997, 4.2672, -21.945599, -5.4863997, 3.6576, -21.945599, -6.0959997, 4.2672, -21.945599, -5.4863997, 4.2672, -21.945599, -6.0959997, 3.6576, -22.555199, -5.4863997, 3.6576, -22.555199, -5.4863997, 4.2672, -22.555199, -6.0959997, 3.6576, -22.555199, -5.4863997, 4.2672, -22.555199, -6.0959997, 4.2672, -22.555199, -6.0959997, 3.6576, -21.945599, -5.4863997, 3.6576, -21.945599, -5.4863997, 3.6576, -22.555199, -6.0959997, 3.6576, -21.945599, -5.4863997, 3.6576, -22.555199, -6.0959997, 3.6576, -22.555199, -5.4863997, 4.2672, -21.945599, -6.0959997, 4.2672, -21.945599, -6.0959997, 4.2672, -22.555199, -5.4863997, 4.2672, -21.945599, -6.0959997, 4.2672, -22.555199, -5.4863997, 4.2672, -22.555199)
 
 [node name="PLMinepit" type="Node3D"]
+script = ExtResource("1_btnjo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0lsgu")

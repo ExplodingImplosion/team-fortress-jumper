@@ -122,8 +122,13 @@ var rocket_jumping := false:
 
 var noclip_enabled := false:
 	set(new):
-		noclip_enabled = new
-		grounded = false
+		if not noclip_enabled:
+			noclip_enabled = new
+			if new:
+				grounded = false
+		else:
+			noclip_enabled = new
+			grounded = false
 		
 		hull.disabled = noclip_enabled
 
@@ -133,11 +138,12 @@ var forced_wishdir := Vector2.ZERO
 func _ready() -> void:
 	_update_for_local_player()
 
-func _unhandled_input(event):
-	if event.is_action("player_crouch"):
-		crouched = event.is_pressed()
-
 func _physics_process(delta: float):
+	if not Quack.Network.node_has_local_authority(self):
+		return
+	var player_owner := Quack.Network.OwnerID.get_node_player_owner(self)
+	var inputs := Inputs.get_player_inputs(player_owner)
+	crouched = inputs.is_action_pressed(&"player_crouch")
 	just_jumped = false
 	if just_landed:
 		if debug_allow_bunny_hopping:
@@ -150,16 +156,13 @@ func _physics_process(delta: float):
 		_handle_noclip(delta)
 		return
 	
-	if is_processing_unhandled_input():
-		wish_dir = Input.get_vector("player_left", "player_right", "player_forward", "player_back")
-		wish_dir = wish_dir.rotated(-view_pivot.rotation.y)
-	#if forced_wishdir.y != 0:
-		#wish_dir.y = forced_wishdir.y
-		#wish_dir = wish_dir.normalized()
-		
-		if grounded and Input.is_action_pressed("player_jump"):
-			# HACK: Ideally there should be a better way to send one-off inputs like these.
-			_jump.rpc_id(1)
+	wish_dir = inputs.input_dir
+	wish_dir = wish_dir.rotated(-view_pivot.rotation.y)
+#if forced_wishdir.y != 0:
+	#wish_dir.y = forced_wishdir.y
+	#wish_dir = wish_dir.normalized()
+	if grounded and inputs.is_action_pressed("player_jump"):
+		_jump()
 	
 	_apply_friction(delta)
 	
@@ -252,8 +255,6 @@ func _clamp_speed(multiplier := 1.0):
 	velocity.x = velocity_planar.x
 	velocity.z = velocity_planar.y
 
-
-@rpc("authority", "call_local", "reliable")
 func _jump():
 	if grounded:
 		grounded = false
@@ -438,7 +439,7 @@ func take_damage(amount: float, inflictor: Player = null):
 func _update_for_local_player():
 	const LAYER_FIRST_PERSON = 1 << 1
 	const LAYER_THIRD_PERSON = 1 << 2
-	var is_local_player := (self == Player.local)
+	var is_local_player := Quack.Network.is_node_local(self)
 	
 	propagate_call("set_process_input", [is_local_player])
 	propagate_call("set_process_unhandled_input", [is_local_player])

@@ -10,13 +10,14 @@ func _deploy():
 	first_person_player.play(&"rocket_launcher_draw")
 
 func _shoot():
-	var shoot_offset := SHOOT_OFFSET_CROUCH if player_owner.crouched else SHOOT_OFFSET
-	
-	var rocket: Rocket = preload("./other/Rocket.tscn").instantiate()
-	setup_projectile(rocket, shoot_offset)
-	rocket.source = player_owner
-	rocket.add_exception(player_owner)
-	player_owner.add_sibling(rocket, true)
+	if Quack.is_multiplayer_authority():
+		var shoot_offset := SHOOT_OFFSET_CROUCH if player_owner.crouched else SHOOT_OFFSET
+		
+		var rocket: Rocket = preload("./other/Rocket.tscn").instantiate()
+		setup_projectile(rocket, shoot_offset)
+		rocket.source = player_owner
+		rocket.add_exception(player_owner)
+		player_owner.add_sibling(rocket, true)
 	
 	shoot_sfx.play()
 	first_person_player.stop()
