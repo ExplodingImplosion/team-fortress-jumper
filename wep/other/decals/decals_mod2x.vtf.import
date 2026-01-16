@@ -12,3 +12,4 @@ dest_files=["res://.godot/imported/decals_mod2x.vtf-0590f2fd96b1ed21ae6380229d31
 
 [params]
 
+srgb_conversion_method=1

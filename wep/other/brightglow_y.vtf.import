@@ -12,3 +12,4 @@ dest_files=["res://.godot/imported/brightglow_y.vtf-ebd48d0735af1bd621effc844af9
 
 [params]
 
+srgb_conversion_method=1

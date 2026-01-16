@@ -12,3 +12,4 @@ dest_files=["res://.godot/imported/wood_floor001.vtf-bbcae27a9b6a29cb344954793c1
 
 [params]
 
+srgb_conversion_method=1

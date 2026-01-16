@@ -220,4 +220,3 @@ static var args_dict: Dictionary[String, Variant]:
 				args_dict[argument] = null
 		
 		return args_dict
-
