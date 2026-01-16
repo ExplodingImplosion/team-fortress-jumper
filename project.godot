@@ -46,7 +46,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 [display]
 
 window/vsync/vsync_mode=3
-window/size/always_on_top.editor=true
+window/size/always_on_top.editor=false
 window/vsync/vsync_mode.editor=0
 
 [editor]
@@ -57,7 +57,7 @@ naming/scene_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godotvmf/plugin.cfg", "res://addons/multirun/plugin.cfg", "res://addons/netfox/plugin.cfg", "res://addons/plugin_refresher/plugin.cfg")
+enabled=PackedStringArray("res://addons/godotvmf/plugin.cfg", "res://addons/plugin_refresher/plugin.cfg")
 
 [file_customization]
 
