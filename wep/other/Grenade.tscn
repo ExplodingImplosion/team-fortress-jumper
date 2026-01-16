@@ -1,10 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://na0nnag5qudg"]
+[gd_scene load_steps=27 format=3 uid="uid://na0nnag5qudg"]
 
 [ext_resource type="Script" uid="uid://c2fe48h3gwtyi" path="res://wep/other/grenade.gd" id="1_3arf6"]
 [ext_resource type="Material" uid="uid://d0gfkuuvgpoy0" path="res://wep/other/grenade_glow.tres" id="2_eayir"]
+[ext_resource type="Script" uid="uid://d0juwtbi2mp3d" path="res://shared/networked_timer.gd" id="2_k1ir5"]
 [ext_resource type="Script" uid="uid://cyhxw63g63cn2" path="res://gameplay/serializer.gd" id="3_mmrkv"]
 [ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="4_rt5xa"]
 [ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="5_mmco4"]
+[ext_resource type="Resource" uid="uid://dp6t5564uswgn" path="res://shared/owner_id_serialization_profile.tres" id="7_k1ir5"]
+[ext_resource type="Script" uid="uid://dk4wa2qc0mihq" path="res://gameplay/owner_id.gd" id="7_mmco4"]
 [ext_resource type="Resource" uid="uid://dtgaspqx6vgt5" path="res://shared/timer_serialization_profile.tres" id="7_rt5xa"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yg74f"]
@@ -99,6 +102,7 @@ type = 9
 rotation = true
 
 [sub_resource type="Resource" id="Resource_cjysr"]
+resource_name = "Grenade"
 script = ExtResource("4_rt5xa")
 source_script = ExtResource("1_3arf6")
 properties = Array[ExtResource("5_mmco4")]([SubResource("Resource_qw30f"), SubResource("Resource_pwkg4"), SubResource("Resource_t7qnw"), SubResource("Resource_veytl")])
@@ -126,6 +130,7 @@ script = ExtResource("1_3arf6")
 process_callback = 0
 wait_time = 2.3
 autostart = true
+script = ExtResource("2_k1ir5")
 
 [node name="Model" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -149,8 +154,11 @@ draw_pass_1 = SubResource("QuadMesh_ejbpp")
 
 [node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
 script = ExtResource("3_mmrkv")
-serialization_properties = Array[ExtResource("4_rt5xa")]([SubResource("Resource_cjysr"), ExtResource("7_rt5xa")])
-nodes = [NodePath(".."), NodePath("../Lifetime")]
+serialization_properties = Array[ExtResource("4_rt5xa")]([SubResource("Resource_cjysr"), ExtResource("7_rt5xa"), ExtResource("7_k1ir5")])
+nodes = [NodePath(".."), NodePath("../Lifetime"), NodePath("../OwnerID")]
+
+[node name="OwnerID" type="Node" parent="."]
+script = ExtResource("7_mmco4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="explode"]

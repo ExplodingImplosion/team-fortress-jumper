@@ -10,6 +10,8 @@ func _ready():
 	if get_tree().current_scene == self:
 		$Lifetime.stop()
 		add_child(preload("./TestCamera.tscn").instantiate())
+	if not Quack.is_multiplayer_authority():
+		($Lifetime as Timer).timeout.disconnect(queue_free)
 	
 #	hit_from_inside = true
 #	set_deferred("hit_from_inside", false)
@@ -23,6 +25,8 @@ func _ready():
 	get_tree().create_timer(0.05).timeout.connect($Model.show)
 
 func _physics_process(delta):
+	if not Quack.is_multiplayer_authority():
+		return
 	if is_colliding():
 		# Pull back a bit. Vanilla does this (CTFBaseRocket::Explode).
 		global_position = get_collision_point() + get_collision_normal() * Player.HU

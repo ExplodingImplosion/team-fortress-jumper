@@ -16,6 +16,8 @@ func _ready():
 	if get_tree().current_scene == self:
 		lifetime.stop()
 		add_child(preload("./TestCamera.tscn").instantiate())
+	if not Quack.is_multiplayer_authority():
+		lifetime.timeout.disconnect(queue_free)
 
 func _physics_process(_delta):
 	var unit := (lifetime.wait_time - lifetime.time_left) / lifetime.wait_time
