@@ -32,4 +32,3 @@ func create_shape_sibling(mesh_instance: MeshInstance3D, convex := true):
 	collision_shape.name = mesh_instance.name + "_col_shape"
 	collision_shape.global_transform = mesh_instance.global_transform
 	mesh_instance.add_sibling.call_deferred(collision_shape)
-

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4083 format=4 uid="uid://c2pljwhpfj3fd"]
+[gd_scene load_steps=4084 format=4 uid="uid://c2pljwhpfj3fd"]
 
 [ext_resource type="Environment" uid="uid://dgtytvqysslw" path="res://maps/KOTHHarvestFinal_env.tres" id="1_sar4u"]
+[ext_resource type="Script" uid="uid://bktl4pck7pyrf" path="res://gameplay/level/common/multiplayer_level.gd" id="1_v45jd"]
 [ext_resource type="Script" uid="uid://dx300m3c4fro5" path="res://addons/godotvmf/src/vmf_node.gd" id="2_jdhie"]
 [ext_resource type="ArrayMesh" uid="uid://doslt4vnljllp" path="res://maps/geometry/koth_harvest_final_vmf_import.mesh" id="3_fc2be"]
 [ext_resource type="Shape3D" uid="uid://cfgio016rfnf" path="res://maps/geometry/koth_harvest_final_vmf_collision_surface_prop_wood.res" id="4_qvpek"]
@@ -57189,6 +57190,7 @@ blend_shape_mode = 0
 data = PackedVector3Array(3.8862, 0.4572, -26.5938, 3.6576, 0.4572, -26.5938, 3.6576, 0.4572, -26.8224, 3.8862, 0.4572, -26.5938, 3.6576, 0.4572, -26.8224, 3.8862, 0.4572, -26.8224, 3.6576, 0, -26.5938, 3.6576, 0, -26.8224, 3.6576, 0.4572, -26.8224, 3.6576, 0, -26.5938, 3.6576, 0.4572, -26.8224, 3.6576, 0.4572, -26.5938, 3.8862, 0, -26.8224, 3.8862, 0, -26.5938, 3.8862, 0.4572, -26.5938, 3.8862, 0, -26.8224, 3.8862, 0.4572, -26.5938, 3.8862, 0.4572, -26.8224, 3.8862, 0, -26.5938, 3.6576, 0, -26.5938, 3.6576, 0.4572, -26.5938, 3.8862, 0, -26.5938, 3.6576, 0.4572, -26.5938, 3.8862, 0.4572, -26.5938, 3.6576, 0, -26.8224, 3.8862, 0, -26.8224, 3.8862, 0.4572, -26.8224, 3.6576, 0, -26.8224, 3.8862, 0.4572, -26.8224, 3.6576, 0.4572, -26.8224)
 
 [node name="KOTHHarvestFinal" type="Node3D"]
+script = ExtResource("1_v45jd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_sar4u")

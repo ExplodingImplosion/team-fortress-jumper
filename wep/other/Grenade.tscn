@@ -1,7 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://na0nnag5qudg"]
+[gd_scene load_steps=24 format=3 uid="uid://na0nnag5qudg"]
 
 [ext_resource type="Script" uid="uid://c2fe48h3gwtyi" path="res://wep/other/grenade.gd" id="1_3arf6"]
 [ext_resource type="Material" uid="uid://d0gfkuuvgpoy0" path="res://wep/other/grenade_glow.tres" id="2_eayir"]
+[ext_resource type="Script" uid="uid://cyhxw63g63cn2" path="res://gameplay/serializer.gd" id="3_mmrkv"]
+[ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="4_rt5xa"]
+[ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="5_mmco4"]
+[ext_resource type="Resource" uid="uid://dtgaspqx6vgt5" path="res://shared/timer_serialization_profile.tres" id="7_rt5xa"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yg74f"]
 friction = 0.5
@@ -72,19 +76,33 @@ alpha_curve = SubResource("CurveTexture_6yvga")
 [sub_resource type="QuadMesh" id="QuadMesh_ejbpp"]
 size = Vector2(0.25, 0.25)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_khovj"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath(".:linear_velocity")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath(".:angular_velocity")
-properties/3/spawn = true
-properties/3/replication_mode = 1
+[sub_resource type="Resource" id="Resource_qw30f"]
+script = ExtResource("5_mmco4")
+name = &"linear_velocity"
+type = 9
+
+[sub_resource type="Resource" id="Resource_pwkg4"]
+script = ExtResource("5_mmco4")
+name = &"angular_velocity"
+type = 9
+
+[sub_resource type="Resource" id="Resource_t7qnw"]
+script = ExtResource("5_mmco4")
+name = &"global_position"
+type = 9
+physical = true
+
+[sub_resource type="Resource" id="Resource_veytl"]
+script = ExtResource("5_mmco4")
+name = &"global_rotation"
+type = 9
+rotation = true
+
+[sub_resource type="Resource" id="Resource_cjysr"]
+script = ExtResource("4_rt5xa")
+source_script = ExtResource("1_3arf6")
+properties = Array[ExtResource("5_mmco4")]([SubResource("Resource_qw30f"), SubResource("Resource_pwkg4"), SubResource("Resource_t7qnw"), SubResource("Resource_veytl")])
+metadata/_custom_type_script = "uid://cdcaujmtsbgia"
 
 [node name="Grenade" type="RigidBody3D"]
 process_thread_group = 1
@@ -129,8 +147,10 @@ lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_rv56n")
 draw_pass_1 = SubResource("QuadMesh_ejbpp")
 
-[node name="Synchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_khovj")
+[node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
+script = ExtResource("3_mmrkv")
+serialization_properties = Array[ExtResource("4_rt5xa")]([SubResource("Resource_cjysr"), ExtResource("7_rt5xa")])
+nodes = [NodePath(".."), NodePath("../Lifetime")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="explode"]

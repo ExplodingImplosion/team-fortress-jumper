@@ -34,8 +34,8 @@ func _unhandled_input(event):
 				var players: Array[Player] = []
 				players.assign(get_tree().get_nodes_in_group("players"))
 				Player.local = players[posmod(players.find(Player.local) + advance, players.size())]
-			KEY_QUOTELEFT:
-				get_tree().reload_current_scene()
+			#KEY_QUOTELEFT:
+				#get_tree().reload_current_scene()
 			KEY_F2:
 				if (event.is_command_or_control_pressed() 
 				and ResourceLoader.exists("res://maps/KOTHHarvestFinal.tscn")):
@@ -63,7 +63,9 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(remove_player)
 	multiplayer.server_disconnected.connect(_start_close_countdown)
 	
-	spawn_player(multiplayer.get_unique_id())
+	spawn_player.call_deferred(multiplayer.get_unique_id())
+	for i in 5:
+		await Quack.tree.process_frame
 	$PlayerDebugger.player = get_node(str(multiplayer.get_unique_id()))
 	
 	if not multiplayer.is_server():

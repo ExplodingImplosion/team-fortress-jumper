@@ -1,9 +1,13 @@
-[gd_scene load_steps=30 format=3 uid="uid://dnn6dus4lvweg"]
+[gd_scene load_steps=38 format=3 uid="uid://dnn6dus4lvweg"]
 
 [ext_resource type="Script" uid="uid://beos766pn00xm" path="res://wep/other/rocket.gd" id="1_s5gan"]
 [ext_resource type="PackedScene" uid="uid://nfgjuo3f0osg" path="res://wep/models/rocket.glb" id="2_b165l"]
 [ext_resource type="Texture2D" uid="uid://b4rwf2fosbhau" path="res://wep/other/brightglow_y.vtf" id="3_75j2b"]
 [ext_resource type="Texture2D" uid="uid://dlwynpd35igen" path="res://wep/other/smokelit.vtf" id="4_watu5"]
+[ext_resource type="Script" uid="uid://cyhxw63g63cn2" path="res://gameplay/serializer.gd" id="5_s7k7m"]
+[ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="6_yi3qg"]
+[ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="7_07gea"]
+[ext_resource type="Resource" uid="uid://dtgaspqx6vgt5" path="res://shared/timer_serialization_profile.tres" id="8_07gea"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_watu5"]
 transparency = 1
@@ -164,6 +168,32 @@ color_ramp = SubResource("GradientTexture1D_yi3qg")
 alpha_curve = SubResource("CurveTexture_75j2b")
 anim_offset_max = 0.75
 
+[sub_resource type="Resource" id="Resource_cjysr"]
+script = ExtResource("7_07gea")
+name = &"source"
+type = 24
+interp_type = 1
+
+[sub_resource type="Resource" id="Resource_k1fwg"]
+script = ExtResource("7_07gea")
+name = &"global_position"
+type = 9
+metadata/_custom_type_script = "uid://r12jyvgis0ul"
+
+[sub_resource type="Resource" id="Resource_xdct5"]
+script = ExtResource("7_07gea")
+name = &"global_rotation"
+type = 9
+rotation = true
+metadata/_custom_type_script = "uid://r12jyvgis0ul"
+
+[sub_resource type="Resource" id="Resource_07gea"]
+resource_name = "Rocket"
+script = ExtResource("6_yi3qg")
+source_script = ExtResource("1_s5gan")
+properties = Array[ExtResource("7_07gea")]([SubResource("Resource_cjysr"), SubResource("Resource_k1fwg"), SubResource("Resource_xdct5")])
+metadata/_custom_type_script = "uid://cdcaujmtsbgia"
+
 [node name="Rocket" type="RayCast3D"]
 exclude_parent = false
 target_position = Vector3(0, 0, -1)
@@ -213,5 +243,10 @@ draw_order = 2
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_07gea")
 draw_pass_1 = SubResource("QuadMesh_sm6mi")
+
+[node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
+script = ExtResource("5_s7k7m")
+serialization_properties = Array[ExtResource("6_yi3qg")]([SubResource("Resource_07gea"), ExtResource("8_07gea")])
+nodes = [NodePath(".."), NodePath("../Lifetime")]
 
 [connection signal="timeout" from="Lifetime" to="." method="queue_free"]
