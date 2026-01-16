@@ -373,6 +373,12 @@ func write(...args) -> void:
 	add_msg(s)
 	print_rich(s)
 
+func broadcast(...args) -> void:
+	var s: String = " ".join(args)
+	add_msg(s)
+	print_rich(s)
+	Quack.tree.current_scene.chat.broadcast(s)
+
 ## Writes all [param args] to the console and prints it to stdout, separated by
 ## indents.
 func twrite(...args) -> void:
