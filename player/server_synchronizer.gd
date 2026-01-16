@@ -105,4 +105,3 @@ func update_input(client_tick: int, client: Dictionary):
 
 static func pr(string: String):
 	Engine.get_main_loop().root.get_node("MPGame/Chat").append(string)
-

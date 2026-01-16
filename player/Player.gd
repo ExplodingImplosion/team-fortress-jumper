@@ -455,4 +455,3 @@ func _update_for_local_player():
 	for mesh in hacky_shit_tp_meshes:
 		# TODO: Show third person model's shadow when in first person.
 		mesh.layers = LAYER_THIRD_PERSON | (0 if is_local_player else LAYER_FIRST_PERSON)
-
