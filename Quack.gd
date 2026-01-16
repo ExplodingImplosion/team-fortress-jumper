@@ -181,7 +181,7 @@ func get_local_mp_id() -> int:
 		return 1
 
 func get_current_scene() -> Node:
-	return tree.current_scene
+	return tree.current_scene.map as Node
 
 func get_nodes_in_group(group: StringName) -> Array[Node]:
 	return tree.get_nodes_in_group(group)
@@ -190,8 +190,9 @@ func get_current_camera() -> Camera3D:
 	return root.get_camera_3d()
 
 func change_scene(scene: String) -> void:
-	var gaming: Error = tree.change_scene_to_file(scene)
-	Console.get_assertfail_msg(gaming == OK,"Changing scene got error %s."%error_string(gaming),true)
+	tree.current_scene.map_scene = load(scene)
+	#var gaming: Error = tree.change_scene_to_file(scene)
+	#Console.get_assertfail_msg(gaming == OK,"Changing scene got error %s."%error_string(gaming),true)
 	# Below is the single dumbest line of code in this file, maybe the whole project.
 	# Yes, this is on purpose. Yes, this works. This is a real thing that you really
 	# have to do if you want to use Godot's SceneTree change_scene_to_file function.
