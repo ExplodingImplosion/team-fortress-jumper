@@ -37,11 +37,14 @@ func _init() -> void:
 			MultiplayerSession.add_local_client(1,Quack.num_users)
 			# HACK cuz rn needs client for session to check teams NOTE maybe dont need anymore
 			MultiplayerSession.add_dummy_client(0)
+			for player:MultiplayerSession.QuackPlayer in MultiplayerSession.players.values():
+				Quack.tree.current_scene.spawn_player(player.id)
 	else:
 		pass
 	if Quack.num_users > 1: Quack.Splitscreen.start_splitscreen()
 
 func _physics_process(_delta: float) -> void:
+	if not Network.is_in_multiplayer() or not MultiplayerSession.local_client: return
 	# Poll BEFORE processing inputs and state. Server gets new inputs, clients
 	# get new server state.
 	Console.write_if_error(multiplayer.poll())
@@ -55,7 +58,8 @@ func _physics_process(_delta: float) -> void:
 	# state or input respectively, this won't (or at least shouldnt) fuck things
 	# up, because new states and inputs are only important during MultiplayerSession's
 	# tick.
-	Console.write_if_error(multiplayer.poll())
+	if multiplayer:
+		Console.write_if_error(multiplayer.poll())
 	if Network.NetDebug.lag_faker_active():
 		Network.NetDebug.lag_faker.process_packets()
 
