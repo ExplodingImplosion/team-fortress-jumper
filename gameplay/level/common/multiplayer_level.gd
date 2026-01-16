@@ -22,6 +22,8 @@ func _init() -> void:
 	Serializer.component_tracker.component_removed.connect(on_node_deleted)#,CONNECT_DEFERRED)
 	# Maybe deferring is undesired if behavior depends on nodes being spawned midway thru the frame idk
 	if Network.is_server():
+		for serializer in Serializer.get_serializers():
+			serializer.increment_uid()
 		
 		# Maybe get rid of this later for local replay stuff
 		if Network.is_in_multiplayer():
