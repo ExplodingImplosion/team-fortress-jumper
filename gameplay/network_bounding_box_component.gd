@@ -94,6 +94,40 @@ static func get_raycast_intersections(raycast: RayCast3D, disable_after: bool = 
 	
 	return collisions
 
+static func get_ray_intersection_intersections(world: World3D, ray_intersection: PhysicsRayQueryParameters3D) -> Array[NetworkBoundingBoxComponent]:
+	var mask := ray_intersection.collision_mask
+	ray_intersection.collision_mask = Collision.Layer.NETWORK# | Collision.Layer.WORLD this would be a good optimization but if penetration is enabled or the ray is supposed to go thru world geo then this is a bad idea
+	var collisions: Array[NetworkBoundingBoxComponent]
+	var last_collision: Object
+	
+	var show_hitreg := can_show_hitreg()
+	#if show_hitreg:
+		#Quack.spawn_debug_raycast_mesh(raycast,10.)
+	var result := world.direct_space_state.intersect_ray(ray_intersection)
+	while result:
+		last_collision = result.collider
+		if last_collision is NetworkBoundingBoxComponent:
+			# Cuz i dont want to type lmao
+			var casted := last_collision as NetworkBoundingBoxComponent
+			collisions.append(casted)
+			var exclude := ray_intersection.exclude
+			exclude.append(casted.get_rid())
+			ray_intersection.exclude = exclude
+			if show_hitreg:
+				add_debug_mesh(casted)
+		else:
+			Console.writerr("%s is not a bounding box."%last_collision)
+			break
+		result = world.direct_space_state.intersect_ray(ray_intersection)
+	for collision in collisions:
+		var exclude := ray_intersection.exclude
+		exclude.erase(collision)
+		ray_intersection.exclude = exclude
+	
+	ray_intersection.collision_mask = mask
+	
+	return collisions
+
 static var bb_frames: Dictionary[NetworkBoundingBoxComponent,Dictionary]
 static var bb_meshes: Dictionary[int,MeshInstance3D]
 static var meshes: Dictionary[MeshInstance3D,NetworkBoundingBoxComponent]
