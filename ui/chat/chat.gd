@@ -259,4 +259,3 @@ static func strip_bbcode(a: String) -> String:
 	result += a.substr(from)
 	# Remove remaining special characters to avoid security issues with concatenation.
 	return result.replace("[", "").replace("]", "");
-
