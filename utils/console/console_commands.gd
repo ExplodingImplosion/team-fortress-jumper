@@ -508,7 +508,7 @@ static func reload_levels_cmd() -> void:
 	playable_levels = get_playable_levels()
 	Console.write("Playable levels reloaded.")
 
-const LEVEL_DIRECTORY_PLUS = "res://gameplay/level/levels/%s"
+const LEVEL_DIRECTORY_PLUS = "res://maps/%s"
 const play_defer_launch_arg = true
 static func play_cmd(level_name: String, tickrate: int = 0) -> void:
 	await Network.await_packets_ready()
