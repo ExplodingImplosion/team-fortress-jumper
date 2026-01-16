@@ -49,7 +49,7 @@ static func register_scenes() -> void:
 		#else:
 			register_scene(scene_paths[i],i)
 
-const GAMEPLAY_DIRECTORY = "res://gameplay"
+const GAMEPLAY_DIRECTORY = "res://"
 static func get_scene_paths(path: String = GAMEPLAY_DIRECTORY) -> PackedStringArray:
 	var scene_paths: PackedStringArray = []
 	for file in DirAccess.get_files_at(path):

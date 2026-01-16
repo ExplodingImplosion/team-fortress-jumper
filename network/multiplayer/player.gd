@@ -43,10 +43,10 @@ func apply_local_inputs() -> void:
 		else:
 			inputs.just_pressed_updowns &= ~(1<<i)
 	inputs.input_dir = Input.get_vector(
-		"analog_left"+action_suffix,
-		"analog_right"+action_suffix,
-		"analog_forward"+action_suffix,
-		"analog_back"+action_suffix
+		"player_left"+action_suffix,
+		"player_right"+action_suffix,
+		"player_forward"+action_suffix,
+		"player_back"+action_suffix
 	) * int(not Inputs.gameplay_inputs_paused)
 	inputs.aim_angle = aim_angle
 	inputs.frame_hint = client.most_recent_received_frame.u32_frame if client.most_recent_received_frame else client.most_recent_acked_frame.num
