@@ -1,9 +1,10 @@
-extends Node3D
+extends "res://gameplay/level/common/multiplayer_level.gd"
 
 @export var map: StaticBody3D
 @export var collider_mesh_instances: Array[MeshInstance3D]
 
 func _ready() -> void:
+	super._ready()
 	for mesh_instance in collider_mesh_instances:
 		create_shape_sibling(mesh_instance, false)
 	
