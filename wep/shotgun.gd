@@ -1,5 +1,8 @@
 extends WeaponNode
 
+const Collision = preload("res://gameplay/collision.gd")
+const Hitbox = preload("res://gameplay/hitbox.gd")
+const BULLET_LAYER = Collision.Layer.HITBOX | Collision.Layer.SOLID_GEO
 const BULLET_SPREAD_DISTANCE_FROM_CENTER := deg_to_rad(3)
 const BULLET_SPREAD_BASE_OFFSETS: Array[Vector2] = [
 	Vector2( 0.0,  0.0),
@@ -66,7 +69,7 @@ func get_raycast_query(base_offset := Vector2.ZERO, first_bullet := false) -> Ph
 	
 	var from := global_position
 	var to := from + (ahead * 10000 * HU)
-	return PhysicsRayQueryParameters3D.create(from, to, 0xFFFFFFFF, [player_owner])
+	return PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER, [player_owner])
 
 func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 	
@@ -79,7 +82,7 @@ func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 	
 	var from := global_position
 	var to := from + (ahead * 10000 * HU)
-	var query := PhysicsRayQueryParameters3D.create(from, to, 0xFFFFFFFF, [player_owner])
+	var query := PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER, [player_owner])
 	var result := get_world_3d().direct_space_state.intersect_ray(query)
 	
 	var hit_point := to
@@ -89,6 +92,9 @@ func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 			if first_bullet:
 				bullet_impact.global_position = hit_point
 				bullet_impact.play()
+		
+		if result.collider is Hitbox:
+			result.collider = (result.collider as Hitbox).owner
 		
 		if result.collider is Player:
 			deal_damage(result.collider)

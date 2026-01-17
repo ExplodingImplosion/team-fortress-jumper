@@ -97,7 +97,8 @@ func spawn_player(id: int):
 		tweak_client(player)
 
 func remove_player(id: int):
-	get_node(str(id)).queue_free()
+	for node in Quack.Network.OwnerID.get_nodes_owned_by(id):
+		node.queue_free()
 
 func _start_close_countdown():
 	chat.append("Server has closed. Closing game, too.")

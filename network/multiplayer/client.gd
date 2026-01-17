@@ -58,7 +58,6 @@ func _init(unique_id: int, num_players: int) -> void:
 	for i in num_players:
 		var player := QuackPlayer.new(self,i)
 		players[i] = player
-		MultiplayerSession.players[player.id] = player
 	if (Network.is_server() and Network.store_send_replays) or Network.store_receive_replays:
 		replay = Replay.new(Quack.get_current_scene(),Quack.Tickrate.target_physics_rate,id)
 	MultiplayerSession.client_added.emit(self)
@@ -85,7 +84,6 @@ func clear() -> void:
 func add_player() -> void:
 	var player := QuackPlayer.new(self,players.size())
 	players.append(player)
-	MultiplayerSession.players[player.id] = player
 
 func get_local_nodes() -> Array[Node]:
 	var nodes: Array[Node] = []

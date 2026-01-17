@@ -107,7 +107,7 @@ func apply_knockback(victim: Player):
 	victim.take_damage(damage, inflictor)
 	
 	if inflictor == victim:
-		print("Damage: %4.2f | Speed: %5.2f" % [damage, victim.velocity.length() / HU])
+		Console.write("Damage: %4.2f | Speed: %5.2f" % [damage, victim.velocity.length() / HU])
 
 func is_valid_target(victim: Player) -> bool:
 	# TODO: More accurate, albeit quirky, distance check.
@@ -129,4 +129,3 @@ static func get_damage_falloff(distance: float) -> float:
 	var unit := clampf(remap(distance, 0.0, 1024 * HU, 0.0, 1.0), 0.0, 1.0)
 	
 	return cubic_interpolate(1.25, 0.5, 0.25, 0.0, unit)
-

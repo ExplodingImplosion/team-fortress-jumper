@@ -278,7 +278,7 @@ static func reset() -> void:
 	# emit network ended signal
 	# save history
 	# this is hacky and dumb as fuck
-	Quack.change_scene(ProjectSettings.get_setting("application/run/main_scene"))
+	Quack.change_scene("res://maps/Level.tscn")
 	WindowUtils.reset_window_title()
 	if get_online():
 		ConnectivityTester.test_internet_connection()

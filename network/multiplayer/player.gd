@@ -20,6 +20,7 @@ func _init(client_owner: Client, player_index: int) -> void:
 	input_buffer.resize(Quack.Network.input_buffer_size)
 	for i in Quack.Network.input_buffer_size:
 		input_buffer[i] = Inputs.PlayerInputs.new()
+	Client.MultiplayerSession.players[id] = self
 	Client.Network.MultiplayerSession.player_added.emit(self)
 	if client.ready:
 		Client.Network.MultiplayerSession.player_readied.emit(self)

@@ -17,6 +17,7 @@ func _ready():
 		lifetime.stop()
 		add_child(preload("./TestCamera.tscn").instantiate())
 	if not Quack.is_multiplayer_authority():
+		freeze = true
 		lifetime.timeout.disconnect(queue_free)
 
 func _physics_process(_delta):

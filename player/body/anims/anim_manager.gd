@@ -224,4 +224,3 @@ func replace_weapon_type_suffix_for_animations(animations: Array[AnimationNodeAn
 		if anim_node.timeline_length > 0.0 and not anim_node.stretch_time_scale:
 			anim_node.timeline_length = get_animation(anim_node.animation).length
 #endregion		
-
