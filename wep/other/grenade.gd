@@ -49,4 +49,3 @@ func _on_body_entered(body: Node) -> void:
 		
 		# TODO: Self-damage should not be affected by this penalty, or at least not as much.
 		damage *= 0.6
-

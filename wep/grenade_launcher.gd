@@ -21,4 +21,3 @@ func _fire_confirming():
 	shoot_sfx.play()
 	first_person_player.stop()
 	first_person_player.play(&"rocket_launcher_fire")
-

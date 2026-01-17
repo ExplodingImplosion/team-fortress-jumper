@@ -107,4 +107,3 @@ func _on_FirstPersonPlayer_animation_finished(anim_name: StringName) -> void:
 		first_person_player.queue(&"shotgun_reload")
 		create_tween().tween_interval(3).finished.connect(
 				first_person_player.play.bind(&"shotgun_reload_end"))
-

@@ -61,4 +61,3 @@ func _exit_tree():
 	get_parent().add_child.call_deferred(trail)
 	trail.force_update_transform.call_deferred()
 	get_tree().create_timer(2).timeout.connect(trail.queue_free)
-
