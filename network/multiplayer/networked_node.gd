@@ -97,19 +97,23 @@ func setup() -> void:
 	
 	num_props = properties.size()
 	var vis_type: VisType
+	var property: Property
 	for i in num_props:
-		# When encoding a delta for an owner, every property is checked. Throw
-		# this index in the iterator no matter what.
-		iter_owner_only.append(i)
-		if properties[i].physical:
+		property = properties[i]
+		if property.physical:
 			iter_physical.append(i)
-		vis_type = properties[i].visibility_type
+			# If this property is only intended to be rewound, never encode it.
+			if property.recent_only:
+				continue
+			
+		iter_owner_only.append(i)
+		vis_type = property.visibility_type
 		if vis_type != VisType.OWNER_ONLY:
 			iter_team_only.append(i)
 			if vis_type == VisType.ALL:
 				iter_all.append(i)
 		# Older version
-		#match properties[i].visibility_type:
+		#match property.visibility_type:
 			#VisType.ALL:
 				#iter_all.append(i)
 				## When encoding for everyone, friendlies will still use their
