@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="NetworkedNode" load_steps=6 format=3 uid="uid://dt53yqpbyioj5"]
+
+[ext_resource type="Script" uid="uid://r12jyvgis0ul" path="res://network/multiplayer/property.gd" id="1_g3en5"]
+[ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="2_qkiyw"]
+[ext_resource type="Script" uid="uid://tmjfjcakddns" path="res://gameplay/hitbox.gd" id="3_uad54"]
+
+[sub_resource type="Resource" id="Resource_22tms"]
+script = ExtResource("1_g3en5")
+name = &"global_position"
+type = 9
+interp_type = 1
+physical = true
+recent_only = true
+metadata/_custom_type_script = "uid://r12jyvgis0ul"
+
+[sub_resource type="Resource" id="Resource_0a0r0"]
+script = ExtResource("1_g3en5")
+name = &"global_rotation"
+type = 9
+interp_type = 1
+physical = true
+rotation = true
+recent_only = true
+metadata/_custom_type_script = "uid://r12jyvgis0ul"
+
+[resource]
+resource_name = "Hitbox Rewinder"
+script = ExtResource("2_qkiyw")
+source_script = ExtResource("3_uad54")
+properties = Array[ExtResource("1_g3en5")]([SubResource("Resource_22tms"), SubResource("Resource_0a0r0")])
+metadata/_custom_type_script = "uid://cdcaujmtsbgia"
