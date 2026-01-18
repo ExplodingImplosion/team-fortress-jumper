@@ -10,6 +10,9 @@ func setup_hitbox_exceptions() -> void:
 		hitbox_exceptions.resize(num_hitboxes)
 		for i in num_hitboxes:
 			hitbox_exceptions[i] = hitboxes[i].get_rid()
+	# This means it also includes your own bounding box hehe lmao
+	if bb:
+		hitbox_exceptions.append(bb.get_rid())
 
 var hitbox_exceptions: Array[RID]
 
@@ -39,6 +42,7 @@ const BULLET_SPREAD_BASE_OFFSETS: Array[Vector2] = [
 var base_damage := 6.0
 
 @export var bullet_trail: GPUParticles3D
+@export var bb: BoundingBox
 
 func _deploy():
 	const DEPLOY_ANIMATIONS = [
