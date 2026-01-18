@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bp3faj46c64ck"]
+[gd_scene load_steps=95 format=3 uid="uid://bp3faj46c64ck"]
 
 [ext_resource type="Script" uid="uid://ralk8skbs5p3" path="res://player/Player.gd" id="1"]
 [ext_resource type="Script" uid="uid://cqeexyt8opffs" path="res://wep/rocket_launcher.gd" id="2_eytv3"]
@@ -31,7 +31,6 @@
 [ext_resource type="AudioStream" uid="uid://dc7ulnpqhqxth" path="res://sfx/melee/shovel_hit2.ogg" id="29_lushe"]
 [ext_resource type="Script" uid="uid://xgi77243puxn" path="res://gameplay/player/collider_component.gd" id="30_8cy8x"]
 [ext_resource type="AudioStream" uid="uid://dxaoxipsj8cnf" path="res://sfx/common/crit_hit1.ogg" id="30_p4trj"]
-[ext_resource type="Script" uid="uid://tmjfjcakddns" path="res://gameplay/hitbox.gd" id="32_2q4k2"]
 [ext_resource type="Script" uid="uid://cyhxw63g63cn2" path="res://gameplay/serializer.gd" id="34_lhjxl"]
 [ext_resource type="AudioStream" uid="uid://c1k6nn541ywka" path="res://sfx/secondary/charging_shield_windup_no_voice.ogg" id="34_ti2ir"]
 [ext_resource type="Script" uid="uid://cdcaujmtsbgia" path="res://network/multiplayer/networked_node.gd" id="35_y2u3w"]
@@ -355,18 +354,6 @@ source_script = ExtResource("5_k3wqx")
 properties = Array[ExtResource("36_uyl0s")]([SubResource("Resource_lnwue"), SubResource("Resource_7tnb4"), SubResource("Resource_2q4k2"), SubResource("Resource_w36ex"), SubResource("Resource_cayk5"), SubResource("Resource_16d2w"), SubResource("Resource_ig735"), SubResource("Resource_ohcej")])
 metadata/_custom_type_script = "uid://cdcaujmtsbgia"
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2q4k2"]
-radius = 0.125
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_w36ex"]
-radius = 0.25
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_7wro5"]
-radius = 0.3
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_u3bl4"]
-radius = 0.1
-
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_w36ex"]
 aabb = AABB(-1, -1, -1, 2, 2, 2)
 
@@ -618,55 +605,6 @@ player = NodePath("..")
 bones/38/scale = Vector3(1.0000001, 0.99999976, 1.0000004)
 bones/39/scale = Vector3(1.0000004, 1.0000004, 1.0000002)
 
-[node name="PelvisBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="1"]
-transform = Transform3D(0.019049998, 5.551115e-17, 1.3322676e-15, -5.551115e-17, -0.019008083, -0.0012629833, -8.881784e-16, 0.0012629833, -0.019008085, -2.459663e-15, 1.1474724, -0.054984465)
-bone_name = "bip_spine_2"
-bone_idx = 5
-
-[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/PelvisBone"]
-remote_path = NodePath("../../../../PelvisHitbox")
-update_scale = false
-
-[node name="DickBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="2"]
-transform = Transform3D(0.01905, -1.0151879e-16, 4.5418744e-09, 7.4212886e-10, -0.018793972, -0.0031127145, 4.480832e-09, 0.0031127143, -0.018793976, 4.22995e-17, 0.80839366, -0.0005839054)
-bone_name = "bip_pelvis"
-bone_idx = 2
-
-[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/DickBone"]
-transform = Transform3D(1, 9.313226e-10, 7.450581e-09, 0, 1, 0, 7.450581e-09, 1.4901161e-08, 0.99999994, -0.47055387, 12.724213, 1.2437847)
-remote_path = NodePath("../../../../DickHitbox")
-update_scale = false
-
-[node name="HeadBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="3"]
-transform = Transform3D(0.019049998, 6.661338e-16, 2.220446e-15, 7.771561e-16, -0.019049786, 9.0027694e-05, -4.440892e-16, -9.002816e-05, -0.019049788, -8.513904e-14, 1.4330072, -0.02134864)
-bone_name = "bip_head"
-bone_idx = 8
-
-[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/HeadBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.72, -2.075)
-remote_path = NodePath("../../../../HeadHitbox")
-update_scale = false
-
-[node name="RightForearmBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="4"]
-transform = Transform3D(-0.0065627946, -0.0037613732, 0.017483825, -0.016968027, -0.0045737904, -0.007353164, 0.0056496253, -0.018106215, -0.0017746063, -0.31651935, 1.0029405, -0.091277)
-bone_name = "bip_lowerArm_R"
-bone_idx = 34
-
-[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/RightForearmBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.16, 0, 0)
-remote_path = NodePath("../../../../RightForearmHitbox")
-update_scale = false
-
-[node name="LeftForearmBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="5"]
-transform = Transform3D(0.0065628113, 0.017483816, -0.003761443, -0.016968008, 0.0073531987, 0.0045737983, 0.0056496565, 0.0017746546, 0.018106196, 0.3165185, 1.0029395, -0.09127462)
-bone_name = "bip_lowerArm_L"
-bone_idx = 12
-
-[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/LeftForearmBone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.16, 0, 0)
-remote_path = NodePath("../../../../LeftForearmHitbox")
-update_scale = false
-
 [node name="SFX" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34118, 0)
 
@@ -695,7 +633,7 @@ one_shot = true
 [node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
 script = ExtResource("34_lhjxl")
 serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x"), ExtResource("40_t7u8x"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex")])
-nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID"), NodePath("../HeadHitbox"), NodePath("../PelvisHitbox"), NodePath("../DickHitbox"), NodePath("../RightForearmHitbox"), NodePath("../LeftForearmHitbox")]
+nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID"), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 
 [node name="OwnerID" type="Node" parent="."]
 script = ExtResource("40_ayguc")
@@ -705,56 +643,6 @@ collision_layer = 64
 collision_mask = 0
 script = ExtResource("43_7tnb4")
 mesh = NodePath("../BBMeshLOL")
-
-[node name="HeadHitbox" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.9995243, 0.027627414, 0.0069611045, -0.026350891, -0.98926884, 0.1429111, 0.0108368825, 0.14267604, 0.98955256, 0.04046742, 1.1874933, -0.3707921)
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource("32_2q4k2")
-
-[node name="Shape" type="CollisionShape3D" parent="HeadHitbox"]
-shape = SubResource("SphereShape3D_2q4k2")
-debug_color = Color(0.90028274, 0.00017173051, 0.76479524, 0.41960785)
-
-[node name="PelvisHitbox" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.992381, -0.11323006, -0.048434004, 0.036628973, -0.6466951, 0.76168597, -0.11760106, 0.7540712, 0.6459528, 0.013565389, 1.0123922, -0.09504917)
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource("32_2q4k2")
-
-[node name="Shape" type="CollisionShape3D" parent="PelvisHitbox"]
-shape = SubResource("SphereShape3D_w36ex")
-debug_color = Color(0.90028274, 0.00017173051, 0.76479524, 0.41960785)
-
-[node name="DickHitbox" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.996435, -0.01735333, -0.08255939, 0.027565878, -0.99187154, -0.124217615, -0.07973271, -0.12605053, 0.9888145, -0.0019162283, 0.44996154, -0.013064135)
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource("32_2q4k2")
-
-[node name="Shape" type="CollisionShape3D" parent="DickHitbox"]
-shape = SubResource("SphereShape3D_7wro5")
-debug_color = Color(0.90028274, 0.00017173051, 0.76479524, 0.41960785)
-
-[node name="RightForearmHitbox" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.6840906, 0.43798706, -0.583137, 0.23988532, -0.6199213, -0.74693316, -0.6888214, -0.6508696, 0.31900933, 0.29000515, 1.0165368, -0.3206737)
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource("32_2q4k2")
-
-[node name="Shape" type="CollisionShape3D" parent="RightForearmHitbox"]
-shape = SubResource("SphereShape3D_u3bl4")
-debug_color = Color(0.90028274, 0.00017173051, 0.76479524, 0.41960785)
-
-[node name="LeftForearmHitbox" type="StaticBody3D" parent="."]
-transform = Transform3D(0.72376007, -0.6895016, -0.022337284, 0.4637502, 0.4622593, 0.7556786, -0.51078486, -0.55730075, 0.65444237, 0.023843713, 1.0006915, -0.6008367)
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource("32_2q4k2")
-
-[node name="Shape" type="CollisionShape3D" parent="LeftForearmHitbox"]
-shape = SubResource("SphereShape3D_u3bl4")
-debug_color = Color(0.90028274, 0.00017173051, 0.76479524, 0.41960785)
 
 [node name="BBMeshLOL" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5646548, 0)
