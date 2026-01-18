@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://bp3faj46c64ck"]
+[gd_scene load_steps=108 format=3 uid="uid://bp3faj46c64ck"]
 
 [ext_resource type="Script" uid="uid://ralk8skbs5p3" path="res://player/Player.gd" id="1"]
 [ext_resource type="Script" uid="uid://cqeexyt8opffs" path="res://wep/rocket_launcher.gd" id="2_eytv3"]
@@ -40,7 +40,9 @@
 [ext_resource type="AudioStream" uid="uid://cqwxehsek2xdy" path="res://sfx/common/rocket_jump_wind.ogg" id="40_4f14b"]
 [ext_resource type="Script" uid="uid://dk4wa2qc0mihq" path="res://gameplay/owner_id.gd" id="40_ayguc"]
 [ext_resource type="Resource" uid="uid://dp6t5564uswgn" path="res://shared/owner_id_serialization_profile.tres" id="40_t7u8x"]
+[ext_resource type="Resource" uid="uid://dt53yqpbyioj5" path="res://shared/hitbox_serialization_profile.tres" id="42_w36ex"]
 [ext_resource type="Script" uid="uid://ddl86p2x31hc0" path="res://gameplay/network_bounding_box_component.gd" id="43_7tnb4"]
+[ext_resource type="Script" uid="uid://tmjfjcakddns" path="res://gameplay/hitbox.gd" id="44_2q4k2"]
 [ext_resource type="AudioStream" uid="uid://chi7fdkssts2p" path="res://sfx/common/footstep/concrete.tres" id="44_w36ex"]
 [ext_resource type="Script" uid="uid://cy8k051va8lv7" path="res://player/footstep_manager.gd" id="48_wpo5q"]
 
@@ -356,6 +358,42 @@ metadata/_custom_type_script = "uid://cdcaujmtsbgia"
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_w36ex"]
 aabb = AABB(-1, -1, -1, 2, 2, 2)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_2q4k2"]
+radius = 0.241
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w36ex"]
+radius = 0.091
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7wro5"]
+radius = 0.209
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u3bl4"]
+radius = 0.195
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wpul2"]
+radius = 0.167
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pcftw"]
+radius = 0.074
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cayk5"]
+radius = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqfsd"]
+radius = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wpo5q"]
+radius = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_22tms"]
+radius = 0.151
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0a0r0"]
+radius = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y5372"]
+radius = 0.142
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("view_pivot", "hull", "body_mesh", "fp_mesh") groups=["players"]]
 process_thread_group = 1
 process_thread_group_order = 0
@@ -604,6 +642,159 @@ player = NodePath("..")
 bones/38/scale = Vector3(1.0000001, 0.99999976, 1.0000004)
 bones/39/scale = Vector3(1.0000004, 1.0000004, 1.0000002)
 
+[node name="BipPelvisBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="1"]
+transform = Transform3D(0.01905, -1.0151879e-16, 4.5418744e-09, 7.4212886e-10, -0.018793972, -0.0031127145, 4.480832e-09, 0.0031127143, -0.018793976, 4.22995e-17, 0.80839366, -0.0005839054)
+bone_name = "bip_pelvis"
+bone_idx = 2
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipPelvisBone"]
+remote_path = NodePath("../../../../BipPelvisHitbox")
+update_scale = false
+
+[node name="BipSpine0Bone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="2"]
+transform = Transform3D(0.01905, 0, 4.541875e-09, 6.347699e-10, -0.01886303, -0.0026624177, 4.4972968e-09, 0.0026624175, -0.018863034, 4.7138606e-16, 0.9525752, -0.024464592)
+bone_name = "bip_spine_0"
+bone_idx = 3
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipSpine0Bone"]
+remote_path = NodePath("../../../../BipSpine0Hitbox")
+update_scale = false
+
+[node name="BipSpine1Bone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="3"]
+transform = Transform3D(0.01905, -2.220446e-16, 4.5418753e-09, 7.6096995e-10, -0.018780714, -0.00319174, 4.4776707e-09, 0.0031917403, -0.018780716, -4.3591106e-15, 1.0429469, -0.037220262)
+bone_name = "bip_spine_1"
+bone_idx = 4
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipSpine1Bone"]
+remote_path = NodePath("../../../../BipSpine1Hitbox")
+update_scale = false
+
+[node name="BipSpine2Bone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="4"]
+transform = Transform3D(0.019049998, 5.551115e-17, 1.3322676e-15, -5.551115e-17, -0.019008083, -0.0012629833, -8.881784e-16, 0.0012629833, -0.019008085, -2.459663e-15, 1.1474724, -0.054984465)
+bone_name = "bip_spine_2"
+bone_idx = 5
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipSpine2Bone"]
+remote_path = NodePath("../../../../BipSpine2Hitbox")
+update_scale = false
+
+[node name="BipSpine3Bone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="5"]
+transform = Transform3D(0.019049998, 9.779884e-16, 4.5418767e-09, -1.015776e-09, -0.018567463, 0.0042604734, 4.42683e-09, -0.004260474, -0.018567465, -1.3986554e-14, 1.2705071, -0.06315945)
+bone_name = "bip_spine_3"
+bone_idx = 6
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipSpine3Bone"]
+remote_path = NodePath("../../../../BipSpine3Hitbox")
+update_scale = false
+
+[node name="BipNeckBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="6"]
+transform = Transform3D(0.019049998, 3.8857806e-16, 4.5418753e-09, -1.2766553e-09, -0.018281953, 0.00535468, 4.358757e-09, -0.005354681, -0.018281955, -6.2011424e-14, 1.3617184, -0.04222863)
+bone_name = "bip_neck"
+bone_idx = 7
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipNeckBone"]
+remote_path = NodePath("../../../../BipNeckHitbox")
+update_scale = false
+
+[node name="BipHeadBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="7"]
+transform = Transform3D(0.019049998, 6.661338e-16, 2.220446e-15, 7.771561e-16, -0.019049786, 9.0027694e-05, -4.440892e-16, -9.002816e-05, -0.019049788, -8.513904e-14, 1.4330072, -0.02134864)
+bone_name = "bip_head"
+bone_idx = 8
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipHeadBone"]
+remote_path = NodePath("../../../../BipHeadHitbox")
+update_scale = false
+
+[node name="BipUpperArmLBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="8"]
+transform = Transform3D(0.007478949, -0.0011184835, -0.017484765, -0.017470796, -0.0019070446, -0.007350982, -0.0013187581, 0.018921271, -0.0017744587, 0.20818453, 1.2559199, -0.07217797)
+bone_name = "bip_upperArm_L"
+bone_idx = 11
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipUpperArmLBone"]
+remote_path = NodePath("../../../../BipUpperArmLHitbox")
+update_scale = false
+
+[node name="BipLowerArmLBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="9"]
+transform = Transform3D(0.0065628113, 0.017483816, -0.003761443, -0.016968008, 0.0073531987, 0.0045737983, 0.0056496565, 0.0017746546, 0.018106196, 0.3165185, 1.0029395, -0.09127462)
+bone_name = "bip_lowerArm_L"
+bone_idx = 12
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipLowerArmLBone"]
+remote_path = NodePath("../../../../BipLowerArmLHitbox")
+update_scale = false
+
+[node name="BipHandLBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="10"]
+transform = Transform3D(0.017483551, -0.0065634325, -0.003761566, 0.0073538646, 0.016967645, 0.0045740707, 0.0017744489, -0.005650023, 0.018106101, 0.38636684, 0.8223459, -0.03114383)
+bone_name = "bip_hand_L"
+bone_idx = 13
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipHandLBone"]
+remote_path = NodePath("../../../../BipHandLHitbox")
+update_scale = false
+
+[node name="BipUpperArmRBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="11"]
+transform = Transform3D(-0.0074812304, -0.001118402, 0.017483786, -0.01746979, 0.0019076328, -0.0073532187, -0.001319098, -0.01892122, -0.0017747879, -0.20818403, 1.2559208, -0.07217819)
+bone_name = "bip_upperArm_R"
+bone_idx = 33
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipUpperArmRBone"]
+remote_path = NodePath("../../../../BipUpperArmRHitbox")
+update_scale = false
+
+[node name="BipLowerArmRBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="12"]
+transform = Transform3D(-0.0065627946, -0.0037613732, 0.017483825, -0.016968027, -0.0045737904, -0.007353164, 0.0056496253, -0.018106215, -0.0017746063, -0.31651935, 1.0029405, -0.091277)
+bone_name = "bip_lowerArm_R"
+bone_idx = 34
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipLowerArmRBone"]
+remote_path = NodePath("../../../../BipLowerArmRHitbox")
+update_scale = false
+
+[node name="BipHandRBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="13"]
+transform = Transform3D(0.017484084, -0.006564936, -0.003756419, -0.0073525105, -0.0169717, -0.0045611835, -0.0017747484, 0.005636075, -0.018110422, -0.386368, 0.82234645, -0.031147774)
+bone_name = "bip_hand_R"
+bone_idx = 35
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipHandRBone"]
+remote_path = NodePath("../../../../BipHandRHitbox")
+update_scale = false
+
+[node name="BipKneeLBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="14"]
+transform = Transform3D(-0.0004985194, 0.018643279, 0.0038835949, -0.018626658, 0.0003310021, -0.0039799944, -0.0039625, -0.003901447, 0.018220311, 0.11363255, 0.43526435, 0.0016671168)
+bone_name = "bip_knee_L"
+bone_idx = 63
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipKneeLBone"]
+remote_path = NodePath("../../../../BipKneeLHitbox")
+update_scale = false
+
+[node name="BipFootLBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="15"]
+transform = Transform3D(0.017681172, -0.006096435, 0.0036210837, -2.2235326e-08, 0.009728342, 0.016378693, -0.007090755, -0.015201818, 0.009029311, 0.1046744, 0.100678295, -0.06950846)
+bone_name = "bip_foot_L"
+bone_idx = 64
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipFootLBone"]
+remote_path = NodePath("../../../../BipFootLHitbox")
+update_scale = false
+
+[node name="BipKneeRBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="16"]
+transform = Transform3D(0.0004986265, 0.018643273, -0.003883586, -0.018626682, -0.00033086629, -0.003979887, -0.0039623664, 0.0039014618, 0.01822034, -0.113632925, 0.4352639, 0.0016670218)
+bone_name = "bip_knee_R"
+bone_idx = 67
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipKneeRBone"]
+remote_path = NodePath("../../../../BipKneeRHitbox")
+update_scale = false
+
+[node name="BipFootRBone" type="BoneAttachment3D" parent="BodyModel/TPSkeleton" index="17"]
+transform = Transform3D(0.017681163, -0.006096388, 0.0036211852, 1.03609636e-07, -0.009728428, -0.01637864, 0.007090764, 0.015201776, -0.009029365, -0.10467536, 0.100678414, -0.06950828)
+bone_name = "bip_foot_R"
+bone_idx = 68
+
+[node name="Transformer" type="RemoteTransform3D" parent="BodyModel/TPSkeleton/BipFootRBone"]
+remote_path = NodePath("../../../../BipFootRHitbox")
+update_scale = false
+
 [node name="SFX" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34118, 0)
 
@@ -631,8 +822,8 @@ one_shot = true
 
 [node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
 script = ExtResource("34_lhjxl")
-serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x"), ExtResource("40_t7u8x")])
-nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID")]
+serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x"), ExtResource("40_t7u8x"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex")])
+nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID"), NodePath("../BipPelvisHitbox"), NodePath("../BipSpine0Hitbox"), NodePath("../BipSpine1Hitbox"), NodePath("../BipSpine2Hitbox"), NodePath("../BipSpine3Hitbox"), NodePath("../BipNeckHitbox"), NodePath("../BipHeadHitbox"), NodePath("../BipUpperArmLHitbox"), NodePath("../BipLowerArmLHitbox"), NodePath("../BipHandLHitbox"), NodePath("../BipUpperArmRHitbox"), NodePath("../BipLowerArmRHitbox"), NodePath("../BipHandRHitbox"), NodePath("../BipKneeLHitbox"), NodePath("../BipFootLHitbox"), NodePath("../BipKneeRHitbox"), NodePath("../BipFootRHitbox")]
 
 [node name="OwnerID" type="Node" parent="."]
 script = ExtResource("40_ayguc")
@@ -646,6 +837,176 @@ mesh = NodePath("../BBMeshLOL")
 [node name="BBMeshLOL" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5646548, 0)
 mesh = SubResource("PlaceholderMesh_w36ex")
+
+[node name="BipPelvisHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.99643505, -0.017353326, -0.082559384, 0.02756588, -0.99187154, -0.124217615, -0.07973272, -0.12605055, 0.9888145, -0.0040229363, 0.6935779, -0.012943732)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipPelvisHitbox"]
+shape = SubResource("SphereShape3D_2q4k2")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipSpine0Hitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.99767745, -0.06515383, -0.019579163, 0.053184357, -0.9264122, 0.37273547, -0.04242326, 0.37083066, 0.9277311, 0.0013976322, 0.839532, -0.009225927)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipSpine0Hitbox"]
+shape = SubResource("SphereShape3D_w36ex")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipSpine1Hitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.9967542, -0.06406632, -0.048561025, 0.027912226, -0.8422912, 0.53829914, -0.07538869, 0.5352016, 0.84135336, 0.007344039, 0.92408305, -0.043070532)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipSpine1Hitbox"]
+shape = SubResource("SphereShape3D_7wro5")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipSpine2Hitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.9924049, -0.1117303, -0.051344514, 0.03752386, -0.67265666, 0.73881996, -0.117117666, 0.731239, 0.6717853, 0.014136623, 1.0133864, -0.09981486)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipSpine2Hitbox"]
+shape = SubResource("SphereShape3D_u3bl4")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipSpine3Hitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.98746973, -0.13660057, -0.07895125, -0.0016114442, -0.49159327, 0.87068236, -0.15778515, 0.85991037, 0.48520976, 0.027915975, 1.096343, -0.18999636)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipSpine3Hitbox"]
+shape = SubResource("SphereShape3D_wpul2")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipNeckHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.9991621, -0.009721371, -0.03880903, -0.025386011, -0.5957652, 0.80265284, -0.03092681, 0.80309963, 0.59496415, 0.04070084, 1.1423526, -0.2704778)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipNeckHitbox"]
+shape = SubResource("SphereShape3D_pcftw")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipHeadHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.9994825, 0.029301958, 0.006557262, -0.028573541, -0.99520475, 0.0923246, 0.0092325555, 0.09209489, 0.9956014, 0.041422993, 1.1866081, -0.3301354)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipHeadHitbox"]
+shape = SubResource("SphereShape3D_cayk5")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipUpperArmLHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(0.3237803, 0.63594633, 0.70033777, -0.500451, 0.7433381, -0.44356376, -0.8027644, -0.20690717, 0.55899036, -0.18632549, 1.0679877, -0.2933766)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipUpperArmLHitbox"]
+shape = SubResource("SphereShape3D_wqfsd")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipLowerArmLHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(0.71207225, -0.7003382, -0.04722551, 0.4862205, 0.44356212, 0.7527715, -0.5063056, -0.5589947, 0.6564908, -0.09699245, 0.92991173, -0.51485926)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipLowerArmLHitbox"]
+shape = SubResource("SphereShape3D_wpo5q")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipHandLHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.53482, -0.83375436, -0.13634229, 0.04122164, -0.1869223, 0.9813613, -0.8438787, 0.51927257, 0.134346, 0.04739649, 1.0285034, -0.6175237)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipHandLHitbox"]
+shape = SubResource("SphereShape3D_22tms")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipUpperArmRHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(0.7194332, 0.36329073, -0.59180194, -0.65455145, 0.07039597, -0.7525994, -0.2317504, 0.92895496, 0.28847072, 0.21068342, 1.1589754, -0.13910188)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipUpperArmRHitbox"]
+shape = SubResource("SphereShape3D_wqfsd")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipLowerArmRHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.6763146, 0.4384828, -0.59177476, 0.26898408, -0.6009002, -0.7525547, -0.685745, -0.6681566, 0.2884465, 0.4091749, 0.9783845, -0.2030418)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipLowerArmRHitbox"]
+shape = SubResource("SphereShape3D_wpo5q")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipHandRHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.82218665, -0.5686079, 0.024761364, -0.1745207, 0.21048619, -0.96174806, 0.5416945, -0.7952227, -0.27226877, 0.27205065, 1.032921, -0.34207892)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipHandRHitbox"]
+shape = SubResource("SphereShape3D_22tms")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipKneeLHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.09053285, -0.9827006, -0.16153306, -0.9942959, 0.09835987, -0.041117385, 0.056294642, 0.15688957, -0.9860082, -0.17399612, 0.44125777, -0.27960375)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipKneeLHitbox"]
+shape = SubResource("SphereShape3D_0a0r0")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipFootLHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.9261525, 0.32695085, -0.18749152, 0.005209459, 0.508562, 0.86091244, 0.37682965, 0.79653233, -0.47270796, -0.20497575, 0.10101786, -0.2603402)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipFootLHitbox"]
+shape = SubResource("SphereShape3D_y5372")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipKneeRHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.14516771, -0.8927084, 0.4264721, -0.73137385, -0.19341071, -0.6538041, 0.66614246, -0.40689182, -0.6248895, 0.21110256, 0.3480148, -0.11077228)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipKneeRHitbox"]
+shape = SubResource("SphereShape3D_0a0r0")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
+
+[node name="BipFootRHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.6967271, 0.6045958, -0.38583136, 0.023602568, -0.51830024, -0.85473114, -0.7168595, -0.60468113, 0.34685344, 0.16142279, 0.097712725, 0.11720696)
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource("44_2q4k2")
+
+[node name="Shape" type="CollisionShape3D" parent="BipFootRHitbox"]
+shape = SubResource("SphereShape3D_y5372")
+debug_color = Color(0.9019608, 0, 0.7647059, 0.41960785)
 
 [connection signal="updated" from="Serializer" to="Pivot/WeaponManager" method="on_updated"]
 [connection signal="owner_changed" from="OwnerID" to="." method="_update_for_local_player"]
