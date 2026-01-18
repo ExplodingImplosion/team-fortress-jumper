@@ -28,8 +28,10 @@ const Serializer = preload("res://gameplay/serializer.gd")
 ## Is this property a "physical" property that should be rewound for hit detection.
 ## i.e. position, rotation, scale, etc.
 @export var physical: bool = false
-## IS this property a rotation. Affects how the property is encoded if it is a float.
+## Is this property a rotation. Affects how the property is encoded if it is a float.
 @export var rotation: bool = false
+## Should this property be not encoded and only used for hitreg rewinding.
+@export var recent_only: bool = false
 var network_type: NetworkType
 var max_bits: int
 var size_bytes: int
