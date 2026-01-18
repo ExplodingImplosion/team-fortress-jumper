@@ -488,9 +488,10 @@ volume_db = -20.0
 max_db = -20.0
 attenuation_filter_cutoff_hz = 18520.0
 
-[node name="Shotgun" type="Node3D" parent="Pivot/WeaponManager" node_paths=PackedStringArray("bullet_trail")]
+[node name="Shotgun" type="Node3D" parent="Pivot/WeaponManager" node_paths=PackedStringArray("bullet_trail", "bb")]
 script = ExtResource("7_3qfhg")
 bullet_trail = NodePath("BulletTrail")
+bb = NodePath("../../../BoundingBox")
 attack_interval = 0.625
 type = 1
 
