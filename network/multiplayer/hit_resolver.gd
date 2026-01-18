@@ -2,6 +2,7 @@ extends Node
 
 const Network = preload("res://network/network.gd")
 const HitResolver = preload("res://network/multiplayer/hit_resolver.gd")
+const Hitbox = preload("res://gameplay/hitbox.gd")
 
 const MultiplayerLevel = preload("res://gameplay/level/common/multiplayer_level.gd")
 const MultiplayerSession = MultiplayerLevel.MultiplayerSession
@@ -150,3 +151,6 @@ class HitRequest:
 			if serializer.owner is CollisionObject3D:
 				var casted := serializer.owner as CollisionObject3D
 				Quack.spawn_recolored_colldier_debug_mesh(BoundingBox.ColliderComponent.component_list[casted],color,time)
+			if Hitbox.hitbox_owners.has(serializer.owner):
+				for hitbox:Hitbox in Hitbox.hitbox_owners[serializer.owner]:
+					Quack.spawn_colldier_debug_mesh(hitbox.get_child(0) as CollisionShape3D,time)
