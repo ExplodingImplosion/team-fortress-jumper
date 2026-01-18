@@ -97,6 +97,7 @@ static func get_raycast_intersections(raycast: RayCast3D, disable_after: bool = 
 static func get_ray_intersection_intersections(world: World3D, ray_intersection: PhysicsRayQueryParameters3D) -> Array[NetworkBoundingBoxComponent]:
 	var mask := ray_intersection.collision_mask
 	ray_intersection.collision_mask = Collision.Layer.NETWORK# | Collision.Layer.WORLD this would be a good optimization but if penetration is enabled or the ray is supposed to go thru world geo then this is a bad idea
+	ray_intersection.hit_from_inside = true
 	var collisions: Array[NetworkBoundingBoxComponent]
 	var last_collision: Object
 	
