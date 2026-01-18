@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://bp3faj46c64ck"]
+[gd_scene load_steps=94 format=3 uid="uid://bp3faj46c64ck"]
 
 [ext_resource type="Script" uid="uid://ralk8skbs5p3" path="res://player/Player.gd" id="1"]
 [ext_resource type="Script" uid="uid://cqeexyt8opffs" path="res://wep/rocket_launcher.gd" id="2_eytv3"]
@@ -40,7 +40,6 @@
 [ext_resource type="AudioStream" uid="uid://cqwxehsek2xdy" path="res://sfx/common/rocket_jump_wind.ogg" id="40_4f14b"]
 [ext_resource type="Script" uid="uid://dk4wa2qc0mihq" path="res://gameplay/owner_id.gd" id="40_ayguc"]
 [ext_resource type="Resource" uid="uid://dp6t5564uswgn" path="res://shared/owner_id_serialization_profile.tres" id="40_t7u8x"]
-[ext_resource type="Resource" uid="uid://dt53yqpbyioj5" path="res://shared/hitbox_serialization_profile.tres" id="42_w36ex"]
 [ext_resource type="Script" uid="uid://ddl86p2x31hc0" path="res://gameplay/network_bounding_box_component.gd" id="43_7tnb4"]
 [ext_resource type="AudioStream" uid="uid://chi7fdkssts2p" path="res://sfx/common/footstep/concrete.tres" id="44_w36ex"]
 [ext_resource type="Script" uid="uid://cy8k051va8lv7" path="res://player/footstep_manager.gd" id="48_wpo5q"]
@@ -632,8 +631,8 @@ one_shot = true
 
 [node name="Serializer" type="Node" parent="." node_paths=PackedStringArray("nodes")]
 script = ExtResource("34_lhjxl")
-serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x"), ExtResource("40_t7u8x"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex"), ExtResource("42_w36ex")])
-nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID"), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+serialization_properties = Array[ExtResource("35_y2u3w")]([SubResource("Resource_vud74"), SubResource("Resource_8cy8x"), SubResource("Resource_610ub"), ExtResource("38_610ub"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), ExtResource("37_vud74"), SubResource("Resource_t7u8x"), ExtResource("40_t7u8x")])
+nodes = [NodePath(".."), NodePath("../Pivot"), NodePath("../Pivot/WeaponManager"), NodePath("../Pivot/WeaponManager/Deploy"), NodePath("../Pivot/WeaponManager/RocketLauncher"), NodePath("../Pivot/WeaponManager/GrenadeLauncher"), NodePath("../Pivot/WeaponManager/Shotgun"), NodePath("../Pivot/WeaponManager/Shovel"), NodePath("../Pivot/WeaponManager/ChargingShield"), NodePath("../OwnerID")]
 
 [node name="OwnerID" type="Node" parent="."]
 script = ExtResource("40_ayguc")
