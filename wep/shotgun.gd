@@ -1,5 +1,18 @@
 extends WeaponNode
 
+func _ready() -> void:
+	owner.ready.connect(setup_hitbox_exceptions)
+
+func setup_hitbox_exceptions() -> void:
+	if Hitbox.hitbox_owners.has(owner):
+		var hitboxes := Hitbox.hitbox_owners[owner] as Array[Hitbox]
+		var num_hitboxes := hitboxes.size()
+		hitbox_exceptions.resize(num_hitboxes)
+		for i in num_hitboxes:
+			hitbox_exceptions[i] = hitboxes[i].get_rid()
+
+var hitbox_exceptions: Array[RID]
+
 const Collision = preload("res://gameplay/collision.gd")
 const Hitbox = preload("res://gameplay/hitbox.gd")
 const BULLET_LAYER = Collision.Layer.HITBOX | Collision.Layer.SOLID_GEO
@@ -69,7 +82,7 @@ func get_raycast_query(base_offset := Vector2.ZERO, first_bullet := false) -> Ph
 	
 	var from := global_position
 	var to := from + (ahead * 10000 * HU)
-	return PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER, [player_owner])
+	return PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER,hitbox_exceptions)
 
 func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 	
@@ -82,7 +95,7 @@ func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 	
 	var from := global_position
 	var to := from + (ahead * 10000 * HU)
-	var query := PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER, [player_owner])
+	var query := PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER, hitbox_exceptions)
 	var result := get_world_3d().direct_space_state.intersect_ray(query)
 	
 	var hit_point := to
@@ -102,6 +115,8 @@ func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 		else:
 			add_decal(preload("./other/BulletDecal.tscn"), hit_point, result.normal)
 			play_bullet_inpact_sfx.call($BulletImpact)
+		if BoundingBox.can_show_hitreg():
+			Quack.spawn_recolored_debug_mesh(Quack.impact_mesh,Color(1,0,0,.5),Transform3D(Basis.IDENTITY,hit_point),10.)
 	
 	var particle_origin := bullet_trail.global_position
 	
