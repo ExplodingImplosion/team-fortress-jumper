@@ -101,8 +101,8 @@ static func get_ray_intersection_intersections(world: World3D, ray_intersection:
 	var last_collision: Object
 	
 	var show_hitreg := can_show_hitreg()
-	#if show_hitreg:
-		#Quack.spawn_debug_raycast_mesh(raycast,10.)
+	if show_hitreg:
+		Quack.draw_line(ray_intersection.from,ray_intersection.to,10.)
 	var result := world.direct_space_state.intersect_ray(ray_intersection)
 	while result:
 		last_collision = result.collider
