@@ -197,7 +197,7 @@ func predict() -> void:
 	update_locally_owned_nodes(nodes)
 	
 	#var offset := input_buffer_offset
-	var input_delay: int = clampi(get_total_input_delay(),0,120)
+	var input_delay: int = clampi(get_total_input_delay(),0,30)
 	change_input_buffer_offset(-input_delay)
 	#Console.write("Offset %s --> %s, input sig %s == %s?"%[offset,input_buffer_offset,acked_input_signature,input_signature-get_total_input_delay()])
 	for i in input_delay:
