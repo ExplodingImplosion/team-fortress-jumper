@@ -62,40 +62,41 @@ func _shoot():
 	first_person_player.stop()
 	first_person_player.play(SHOOT_ANIMATIONS.pick_random())
 	
+	var rng_seed := Inputs.get_player_inputs(Quack.Network.OwnerID.get_node_player_owner(owner)).frame_hint
+	
 	for i in BULLET_SPREAD_BASE_OFFSETS.size():
+		var first_bullet := i == 0
+		seed(rng_seed+i)
+		var spread := Vector2.ZERO if first_bullet else Vector2(
+			randfn(0, inaccuracy), 
+			randfn(0, inaccuracy)) + BULLET_SPREAD_BASE_OFFSETS[i]
+		
 		if HitResolver.is_valid_hit_resolution_subject(player_owner):
 			HitResolver.hit_resolver.request_hit(
 				OwnerID.get_node_owner_id(player_owner),
 				self,
-				_create_bullet.bind(BULLET_SPREAD_BASE_OFFSETS[i], i == 0),
+				_create_bullet.bind(spread),
 				BoundingBox.get_ray_intersection_intersections(
 					get_world_3d(),
-					get_raycast_query(BULLET_SPREAD_BASE_OFFSETS[i], i == 0)
+					get_raycast_query(spread)
 				)
 			)
 		else:
-			_create_bullet(BULLET_SPREAD_BASE_OFFSETS[i], i == 0)
+			_create_bullet(spread,first_bullet)
 
-func get_raycast_query(base_offset := Vector2.ZERO, first_bullet := false) -> PhysicsRayQueryParameters3D:
-	var spread := Vector2.ZERO if first_bullet else Vector2(
-			randfn(0, inaccuracy), 
-			randfn(0, inaccuracy))
+func get_raycast_query(offset: Vector2) -> PhysicsRayQueryParameters3D:
 	var ahead := -global_transform.basis.z.rotated(
-			global_transform.basis.y, base_offset.y + spread.y).rotated(
-			global_transform.basis.x, base_offset.x + spread.x)
+			global_transform.basis.y, offset.y).rotated(
+			global_transform.basis.x, offset.x)
 	
 	var from := global_position
 	var to := from + (ahead * 10000 * HU)
 	return PhysicsRayQueryParameters3D.create(from, to, BULLET_LAYER,hitbox_exceptions)
 
-func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
-	
-	var spread := Vector2.ZERO if first_bullet else Vector2(
-			randfn(0, inaccuracy), 
-			randfn(0, inaccuracy))
+func _create_bullet(spread: Vector2, first_bullet: bool = false):
 	var ahead := -global_transform.basis.z.rotated(
-			global_transform.basis.y, base_offset.y + spread.y).rotated(
-			global_transform.basis.x, base_offset.x + spread.x)
+			global_transform.basis.y, spread.y).rotated(
+			global_transform.basis.x, spread.x)
 	
 	var from := global_position
 	var to := from + (ahead * 10000 * HU)
@@ -110,7 +111,11 @@ func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 				bullet_impact.global_position = hit_point
 				bullet_impact.play()
 		
+		var show_hitreg := BoundingBox.can_show_hitreg()
+		
 		if result.collider is Hitbox:
+			if show_hitreg:
+				Quack.spawn_recolored_colldier_debug_mesh((result.collider as Hitbox).get_child(0) as CollisionShape3D,Color.ORANGE-Color(0,0,0,.5),10.)
 			result.collider = (result.collider as Hitbox).owner
 		
 		if result.collider is Player:
@@ -119,7 +124,8 @@ func _create_bullet(base_offset := Vector2.ZERO, first_bullet := false):
 		else:
 			add_decal(preload("./other/BulletDecal.tscn"), hit_point, result.normal)
 			play_bullet_inpact_sfx.call($BulletImpact)
-		if BoundingBox.can_show_hitreg():
+		if show_hitreg:
+			Console.write("Hit %s"%result.collider.name if result.collider is Node else result.collider)
 			Quack.spawn_recolored_debug_mesh(Quack.impact_mesh,Color(1,0,0,.5),Transform3D(Basis.IDENTITY,hit_point),10.)
 	
 	var particle_origin := bullet_trail.global_position
