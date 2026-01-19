@@ -105,7 +105,7 @@ class HitRequest:
 			HitRequest.hitreg_debug_boxes(show_hitreg,serializer,Color(0,1,0,.05))
 			
 			# Serializer is old enough to be interpolated between 2 frames
-			if serializer.serialized.frame_created <= frame_before.num and not frame_before == current_frame:
+			if serializer.serialized.frame_created <= frame_before.num and not (frame_before == current_frame or interp_frac == 1.):
 				dirtied.append(serializer)
 				# If showing hitreg, then get the debug box position at wherever the physical
 				# properties were when the player shot, but before everything else so that
